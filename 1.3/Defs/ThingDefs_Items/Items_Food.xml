@@ -4,7 +4,7 @@
   <ThingDef ParentName="MealBase">
     <defName>MealNutrientSupplementPill</defName>
     <label>nutrient supplement pill</label>
-    <description>A highly advanced processed food, synthesized in a 3D-printing [...], not very tasty for the human body.</description>
+    <description>A highly advanced processed food, synthesized in a 3D-printing plasma oven, not very tasty for the human body.</description>
     <graphicData>
       <texPath>Things/Item/Meal/NutrientSupplementPill</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
@@ -26,7 +26,7 @@
     <tradeability>Buyable</tradeability>
     <comps>
       <li Class="CompProperties_Rottable">
-        <daysToRotStart>600</daysToRotStart>  <!-- short rot time, you want to make them as needed not store them -->
+        <daysToRotStart>600</daysToRotStart>
         <rotDestroys>true</rotDestroys>
       </li>
     </comps>
