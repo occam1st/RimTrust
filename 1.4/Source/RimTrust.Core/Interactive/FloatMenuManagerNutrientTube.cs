@@ -28,11 +28,12 @@ namespace RimTrust.Core.Interactive
             usesDefaultJobDriver = new Dictionary<string, bool>();
             currentAction = null;
             shiftKeyItems = new Dictionary<string, Action>();
-           Add("FloatMenuCaptionNutrientTube".Translate(), delegate (Pawn p)
+            
+          /* Add("NoNutrients".Translate(), delegate (Pawn p)
             {
-                Log.Message("Nutrient Tube used..");
+                //Log.Message("Nutrient Tube used..");
 
-            }, usesDefaultJobDriver: true);
+            }, usesDefaultJobDriver: true);*/
         }
 
         public static void Add(string str, Action<Pawn> action, bool usesDefaultJobDriver = false)

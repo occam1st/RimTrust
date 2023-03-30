@@ -21,7 +21,7 @@
     <workType>Hauling</workType>
     <verb>fill</verb>
     <gerund>filling</gerund>
-    <priorityInType>19</priorityInType>
+	<priorityInType>19</priorityInType>
     <requiredCapacities>
       <li>Manipulation</li>
     </requiredCapacities>

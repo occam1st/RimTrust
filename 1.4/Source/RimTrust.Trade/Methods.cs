@@ -50,7 +50,7 @@ namespace RimTrust.Trade
     public static class Methods
     {
 
-        internal static bool debug = false;
+        public static bool debug = false;
         internal static List<Tradeable> cacheNotes = new List<Tradeable>();
         private static readonly FieldInfo tradeables = AccessTools.Field(typeof(TradeDeal), "tradeables");
 
@@ -467,9 +467,15 @@ namespace RimTrust.Trade
                 }
             }
             end = test + totalValue;
-            //Log.Message(end);
+            if (debug)
+            {
+                Log.Message(end);
+            }
             int netGain = (int)(totalValue * 0.6);
-            //Log.Message("Net gain on Trustee collection (60%): " + netGain.ToString());
+            if (debug)
+            {
+                Log.Message("Net gain on Trustee collection (60%): " + netGain.ToString());
+            }
             return (netGain / 1000);
         }
 

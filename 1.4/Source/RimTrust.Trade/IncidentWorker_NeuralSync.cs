@@ -30,21 +30,22 @@ namespace RimTrust.Trade
             {
                 LoadTrustFunds.LoadLegacySkills();
             }
+            foreach (Map mapint in Find.Maps)
 
-            Map map = (Map)parms.target;
-            foreach (Pawn pawn in map.mapPawns.FreeColonists)
+            {
+                foreach (Pawn pawn in mapint.mapPawns.FreeColonists)
                 {
-                //Log.Message("In first foreach loop NeuralSync TryExecuteWorker, map" + map.Index);
-                var NeuralImplantOnPawn = pawn.health?.hediffSet?.GetFirstHediffOfDef(HediffDef_Neural.NeuralImplant);
-                if (NeuralImplantOnPawn != null)
+                    //Log.Message("In first foreach loop NeuralSync TryExecuteWorker, map" + map.Index);
+                    var NeuralImplantOnPawn = pawn.health?.hediffSet?.GetFirstHediffOfDef(HediffDef_Neural.NeuralImplant);
+                    if (NeuralImplantOnPawn != null)
                     {
-                    //Log.Message("In second if NeuralSync TryExecuteWorker for: " + pawn.Name.ToString());
-                    Methods.UpdatePawnSkillFromLegacy(pawn);
-                    Messages.Message("Incident_NeuralSync_SuccessMessage".Translate(), MessageTypeDefOf.PositiveEvent);
-                    //Log.Message("Pawn skill updating done, before return true: " + pawn.Name.ToString());
-                    //return true;
+                        //Log.Message("In second if NeuralSync TryExecuteWorker for: " + pawn.Name.ToString());
+                        Methods.UpdatePawnSkillFromLegacy(pawn);
+                        Messages.Message("Incident_NeuralSync_SuccessMessage".Translate(), MessageTypeDefOf.PositiveEvent);
+                        //Log.Message("Pawn skill updating done, before return true: " + pawn.Name.ToString());
                     }
                 }
+            }
             return false;
         }
     }

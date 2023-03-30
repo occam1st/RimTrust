@@ -18,7 +18,8 @@ Final confirmation : Are you sure you want to remove all mod contents?</DlgRemov
   <MsgModContentsRemoved>All mod items removed ({0} total).You can save the game and disable this mod safely.</MsgModContentsRemoved>
   <FloatMenuCaptionNeuralChair>Legacy skill upload</FloatMenuCaptionNeuralChair>
   <FloatMenuCaptionNeuralChair2>Legacy skill download</FloatMenuCaptionNeuralChair2>
-  <FloatMenuCaptionTest>valuables on death test</FloatMenuCaptionTest>
+  <FloatMenuCaptionTrusteeCollectorTest>valuables on death test</FloatMenuCaptionTrusteeCollectorTest>
   <FloatMenuCaptionLegacySkills>Legacy skill archive</FloatMenuCaptionLegacySkills>
+  <FloatMenuCaptionNutrientTube>Nutrient Tube action..</FloatMenuCaptionNutrientTube>
   <FloatMenuTotalLegacyArchive>total legacy skill archive:</FloatMenuTotalLegacyArchive>
 </LanguageData>

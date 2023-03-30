@@ -275,22 +275,39 @@ namespace RimTrust.Core.Interactive
         }
         public override IEnumerable<Gizmo> GetGizmos()
         {
-            foreach (Gizmo gizmo in base.GetGizmos())
+            foreach(Gizmo gizmo in base.GetGizmos())
+
             {
                 yield return gizmo;
             }
-            //IEnumerator<Gizmo> enumerator = null;
-            if (Prefs.DevMode && !this.Empty)
+            IEnumerator<Gizmo> enumerator = null;
+            if (DebugSettings.ShowDevGizmos)
             {
-                yield return new Command_Action
+                if (!this.Empty)
                 {
-                    defaultLabel = "Debug: Set progress to 1",
-                    action = delegate ()
+                    yield return new Command_Action
                     {
-                        this.Progress = 1f;
-                    }
-                };
+                        defaultLabel = "DEV: Set progress to 1",
+                        action = delegate ()
+                        {
+                            this.Progress = 1f;
+                        }
+                    };
+                }
+                if (this.SpaceLeftForNutrient > 0)
+                {
+                    yield return new Command_Action
+                    {
+                        defaultLabel = "DEV: Fill",
+                        action = delegate ()
+                        {
+                            this.Progress = 1f;
+                            this.NutrientCount = 75;
+                        }
+                    };
+                }
             }
+            yield break;
             yield break;
         }
         
@@ -312,10 +329,10 @@ namespace RimTrust.Core.Interactive
             powerComp = GetComp<CompPowerTrader>();
         }
 
-        /*
+
         public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn selPawn)
         {
-            (!selPawn.CanReach(this, PathEndMode.InteractionCell, Danger.Some))
+            if (!selPawn.CanReach(this, PathEndMode.InteractionCell, Danger.Some))
             {
                 FloatMenuOption item = new FloatMenuOption("CannotUseNoPath".Translate(), null);
                 return new List<FloatMenuOption>
@@ -347,8 +364,48 @@ namespace RimTrust.Core.Interactive
                 item4
             };
             }
+            if (Find.CurrentMap.IsPlayerHome)
+            {
+                bool flagPotatoe, flagRice, flagCorn;
+                string itemname = "";
+                flagPotatoe = flagRice = flagCorn = false;
+                foreach (Thing item in Find.CurrentMap.listerThings.AllThings)
+                {
+                    itemname = item.def.defName;
+                    
+                    switch (itemname)
+                    {
+                        case "RawRPotatoes":
+                            flagPotatoe = true;
+                            Log.Message("itemname: " + itemname + "flagged potatoe");
+                            break;
+                        case "RawRice":
+                            flagRice = true;
+                            Log.Message("itemname: " + itemname + "flagged rice");
+                            break;
+                        case "RawCorn":
+                            flagCorn = true;
+                            Log.Message("itemname: " + itemname + "flagged corn");
+                            break;
+                    }
+
+                }
+                    if (!flagPotatoe && !flagRice && !flagCorn)
+                       { FloatMenuOption item5 = new FloatMenuOption("NoNutrients".Translate(), null);
+                        //Log.Message("Building_NT item5: " + itemname);
+                        return new List<FloatMenuOption>
+                            {
+                            item5
+                            };
+                        }
+                
+                    
+                    
+                
+                
+            }
             return FloatMenuManagerNutrientTube.RequestBuild(this, selPawn);
         } 
-        */
+        
     }
 }

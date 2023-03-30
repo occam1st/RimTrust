@@ -35,7 +35,7 @@
     <workerClass>RimTrust.Trade.IncidentWorker_NeuralSync</workerClass>
     <baseChance>10</baseChance>
     <letterLabel>Neural Sync</letterLabel>
-    <letterText>Your legacy descendants inherit more than just wordly riches. True power comes with knowledge.</letterText>
+    <letterText>Your legacy descendants inherit more than just worldly riches. True power comes with knowledge.</letterText>
   </IncidentDef>
 
 </Defs>

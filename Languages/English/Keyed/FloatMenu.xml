@@ -2,5 +2,5 @@
 <LanguageData>
   <IncapableOfNIC>Neural Overdose</IncapableOfNIC>
   <IncapableOfNIC2>Neural Fatigue</IncapableOfNIC2>
-  <NoNutrients>need raw plant nutrition</NoNutrients>
+  <NoNutrients>Cannot fill nutrient tube: need raw plant nutrients</NoNutrients>
 </LanguageData>

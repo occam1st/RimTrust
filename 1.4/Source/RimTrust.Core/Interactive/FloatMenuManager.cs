@@ -1,4 +1,5 @@
 ﻿using RimTrust.Trade.Ext;
+using RimTrust.Trade;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,16 @@ namespace RimTrust.Core.Interactive
             {
                 ExtUtil.PrepareVirtualTrade(p, new Trader_BankNoteExchange());
             }, usesDefaultJobDriver: true);
+            if (Methods.debug)
+            Add("FloatMenuCaptionTrusteeCollectorTest".Translate(), delegate (Pawn p)
+            {
+                int ValuablesGain = Methods.CalculateColonyValuables();
+                Thing thing = ThingMaker.MakeThing(ThingDefOf.Silver);
+                thing.stackCount = ValuablesGain;
+                string msg = ValuablesGain.ToString();
+                Log.Message("this is a TrusteeCollector test that fired with " + msg);
+                
+            });
             AddShiftKeyItem("FloatMenuCaptionRemoveAll".Translate(), delegate
             {
                 Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("DlgRemoveModContents".Translate(), delegate
