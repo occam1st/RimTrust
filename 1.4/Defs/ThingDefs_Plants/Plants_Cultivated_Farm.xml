@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--=========================== Production crops ==============================-->
+
+  <ThingDef ParentName="PlantBase">
+    <defName>Plant_Arborfibre</defName>
+    <label>arborfibre plant</label>
+    <description>A genetically enhanced fiber grown with enzymes and hormones. These are used to craft artificial wood.</description>
+    <statBases>
+      <MaxHitPoints>75</MaxHitPoints>
+	  <Nutrition>0</Nutrition>
+	  <Flammability>0.5</Flammability>
+	</statBases>
+    <graphicData>
+      <texPath>Things/Plant/CottonPlant</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+    <selectable>true</selectable>
+    <pathCost>14</pathCost>
+    <ingestible>
+	  <foodType>Plant</foodType>
+	  <preferability>NeverForNutrition</preferability>
+	</ingestible>
+    <plant>
+	  <fertilitySensitivity>1</fertilitySensitivity>
+	  <sowWork>2000</sowWork>
+      <sowMinSkill>10</sowMinSkill>
+      <growDays>6</growDays>
+      <harvestTag>Wood</harvestTag>
+      <harvestedThingDef>WoodLog</harvestedThingDef>
+	  <harvestYield>2</harvestYield>
+	  <harvestMinGrowth>0.60</harvestMinGrowth>
+      <sowTags>
+        <li>Hydroponic</li>
+      </sowTags>
+      <topWindExposure>0.1</topWindExposure>
+      <immatureGraphicPath>Things/Plant/CottonPlant_Immature</immatureGraphicPath>
+      <visualSizeRange>0.3~1.00</visualSizeRange>
+      <wildOrder>2</wildOrder>
+    </plant>
+  </ThingDef>
+</Defs>

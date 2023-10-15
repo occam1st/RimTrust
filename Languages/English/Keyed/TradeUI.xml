@@ -6,7 +6,7 @@
 Traders can give change using silver.</SilverTip>
   <BankNoteTip>The count of banknotes you want to pay by.
 
-A banknote is as effective as 1000 silver in the trade,and there're no extra fees for it.</BankNoteTip>
+A banknote is as effective as 1000 silver in the trade, and there are no extra fees for it.</BankNoteTip>
   <NotEnoughSilverColony>Your colony doesn't have enough silver to solve the payment.</NotEnoughSilverColony>
   <NotEnoughSilverBank>You are requesting too much silver.Please split this deal into some smaller ones.</NotEnoughSilverBank>
   <NoNotes>No banknotes available.</NoNotes>
@@ -17,4 +17,5 @@ A banknote is as effective as 1000 silver in the trade,and there're no extra fee
   </DepositTip>
   <DepositSilverTip>The count of silver near orbital trade beacons.</DepositSilverTip>
   <DepositBankNoteTip>The count of banknotes near orbital trade beacons.</DepositBankNoteTip>
+  <NeuralImplant>buy 1 neural implant (2000 silver)</NeuralImplant>
 </LanguageData>

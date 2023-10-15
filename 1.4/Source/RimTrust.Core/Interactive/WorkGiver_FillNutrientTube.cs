@@ -39,12 +39,12 @@ namespace RimTrust.Core.Interactive
 
 		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
 		{
-			Log.Message("In WorkGiver_FillNutrientTube HasJobOnThing Start");
+			//Log.Message("In WorkGiver_FillNutrientTube HasJobOnThing Start");
 
 			Building_NutrientTube building_NutrientTube = t as Building_NutrientTube;
 			if (building_NutrientTube == null || building_NutrientTube.Produced || building_NutrientTube.SpaceLeftForNutrient <= 0)
 			{
-				Log.Message("WG_FNT not spawned, producing or empty");
+				//Log.Message("WG_FNT not spawned, producing or empty");
 				return false;
 			}
 			float ambientTemperature = building_NutrientTube.AmbientTemperature;
@@ -52,22 +52,22 @@ namespace RimTrust.Core.Interactive
 			if (ambientTemperature < compProperties.minSafeTemperature + 2f || ambientTemperature > compProperties.maxSafeTemperature - 2f)
 			{
 				JobFailReason.Is(WorkGiver_FillNutrientTube.TemperatureTrans, null);
-				Log.Message("WG_FNT bad temperature");
+				//Log.Message("WG_FNT bad temperature");
 				return false;
 			}
 			if (t.IsForbidden(pawn) || !pawn.CanReserve(t, 1, -1, null, forced))
 			{
-				Log.Message("WG_FNT forbidden");
+				//Log.Message("WG_FNT forbidden");
 				return false;
 			}
 			if (pawn.Map.designationManager.DesignationOn(t, DesignationDefOf.Deconstruct) != null)
 			{
-				Log.Message("WG_FNT to be deconstructed");
+				//Log.Message("WG_FNT to be deconstructed");
 				return false;
 			}
 			if (this.FindNutrient(pawn, building_NutrientTube) == null)
 			{
-				Log.Message("WG_FNT no nutrients");
+				//Log.Message("WG_FNT no nutrients");
 				JobFailReason.Is(WorkGiver_FillNutrientTube.NoNutrientsTrans, null);
 				return false;
 			}
@@ -100,8 +100,8 @@ namespace RimTrust.Core.Interactive
 			{
 				Nutrients = CoreDefOf.RawCorn;
 			}
-			Log.Message("WG_FNT did not find any nutrients");
-			Log.Message("WG_FNT find nutrients return value: " + GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForDef(Nutrients), PathEndMode.ClosestTouch, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), 9999f, validator, null, 0, -1, false, RegionType.Set_Passable, false));
+			//Log.Message("WG_FNT did not find any nutrients");
+			//Log.Message("WG_FNT find nutrients return value: " + GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForDef(Nutrients), PathEndMode.ClosestTouch, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), 9999f, validator, null, 0, -1, false, RegionType.Set_Passable, false));
 			return GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForDef(Nutrients), PathEndMode.ClosestTouch, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), 9999f, validator, null, 0, -1, false, RegionType.Set_Passable, false);
 			
 		}

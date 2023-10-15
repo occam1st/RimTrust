@@ -20,6 +20,10 @@ Final confirmation : Are you sure you want to remove all mod contents?</DlgRemov
   <FloatMenuCaptionNeuralChair2>Legacy skill download</FloatMenuCaptionNeuralChair2>
   <FloatMenuCaptionTrusteeCollectorTest>valuables on death test</FloatMenuCaptionTrusteeCollectorTest>
   <FloatMenuCaptionLegacySkills>Legacy skill archive</FloatMenuCaptionLegacySkills>
+  <FloatMenuCaptionLegacyResearchUpload>Legacy research upload</FloatMenuCaptionLegacyResearchUpload>
   <FloatMenuCaptionNutrientTube>Nutrient Tube action..</FloatMenuCaptionNutrientTube>
-  <FloatMenuTotalLegacyArchive>total legacy skill archive:</FloatMenuTotalLegacyArchive>
+  <FloatMenuCaptionTotalLegacySkillArchive>total legacy skill archive:</FloatMenuCaptionTotalLegacySkillArchive>
+  <FloatMenuCaptionLegacyResearchArchive>Legacy research archive</FloatMenuCaptionLegacyResearchArchive>
+  <FloatMenuCaptionTotalLegacyResearchArchive>total legacy research archive:</FloatMenuCaptionTotalLegacyResearchArchive>
+  <FloatMenuCaptionLegacyCache>Legacy research download</FloatMenuCaptionLegacyCache>
 </LanguageData>

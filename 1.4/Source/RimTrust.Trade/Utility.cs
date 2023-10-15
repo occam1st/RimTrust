@@ -31,7 +31,7 @@ namespace RimTrust.Trade
         {
             foreach (Tradeable cacheNote in Methods.cacheNotes)
             {
-                Log.Message(cacheNote.ThingDef.defName + ",colony=" + cacheNote.CountHeldBy(Transactor.Colony) + ",trader=" + cacheNote.CountHeldBy(Transactor.Trader) + ",dura=" + cacheNote.AnyThing.HitPoints.ToString());
+                //Log.Message(cacheNote.ThingDef.defName + ",colony=" + cacheNote.CountHeldBy(Transactor.Colony) + ",trader=" + cacheNote.CountHeldBy(Transactor.Trader) + ",dura=" + cacheNote.AnyThing.HitPoints.ToString());
             }
         }
 
@@ -39,13 +39,13 @@ namespace RimTrust.Trade
         {
             foreach (Tradeable item in cache)
             {
-                Log.Message(item.ThingDef.defName + ",x" + item.CountHeldBy(Transactor.Colony).ToString() + ",dura=" + item.AnyThing.HitPoints.ToString() + ",cnt=" + item.CountToTransfer);
+                //Log.Message(item.ThingDef.defName + ",x" + item.CountHeldBy(Transactor.Colony).ToString() + ",dura=" + item.AnyThing.HitPoints.ToString() + ",cnt=" + item.CountToTransfer);
             }
         }
 
         public static void DebugprintfUpdateCurrencyCount(int num, int j, Transactor target)
         {
-            Log.Message("num=" + num + ",target=" + target + ",j=" + j);
+            //Log.Message("num=" + num + ",target=" + target + ",j=" + j);
         }
 
         public static void AskPayByBankNotes(Tradeable currency, bool isVirtual = false)
@@ -76,11 +76,11 @@ namespace RimTrust.Trade
         {
             var SaveCount = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             string savedSkill = "";
-            Log.Message("DebugprintSkillSafeNICRand before for loop times");
+            //Log.Message("DebugprintSkillSafeNICRand before for loop times");
             for (int i = 0; i < times; i++)
             {
                 savedSkill = Methods.SelectSkillToSafeNIC(pawn);
-                Log.Message("DebugprintSkillSafeNICRand in loop " + i + " after SelectSkill with SavedSkill " + savedSkill);
+                //Log.Message("DebugprintSkillSafeNICRand in loop " + i + " after SelectSkill with SavedSkill " + savedSkill);
                 switch(savedSkill)
                 {
                     case "Shooting":

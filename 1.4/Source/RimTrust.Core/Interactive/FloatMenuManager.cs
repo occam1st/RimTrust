@@ -29,16 +29,40 @@ namespace RimTrust.Core.Interactive
             {
                 ExtUtil.PrepareVirtualTrade(p, new Trader_BankNoteExchange());
             }, usesDefaultJobDriver: true);
-            if (Methods.debug)
-            Add("FloatMenuCaptionTrusteeCollectorTest".Translate(), delegate (Pawn p)
+            Add("FloatMenuCaptionLegacyCache".Translate(), delegate (Pawn p)
             {
-                int ValuablesGain = Methods.CalculateColonyValuables();
-                Thing thing = ThingMaker.MakeThing(ThingDefOf.Silver);
-                thing.stackCount = ValuablesGain;
-                string msg = ValuablesGain.ToString();
-                Log.Message("this is a TrusteeCollector test that fired with " + msg);
+
+                
+                string msg = Methods.LegacyCacheMenu();
+                msg += "\n";
+                msg += Methods.UpdateColonyResearchFromLegacy(p);
+                DiaNode diaNode = new DiaNode(msg);
+                DiaOption diaOption = new DiaOption("Disconnect".Translate());
+                diaOption.resolveTree = true;
+                diaNode.options.Add(diaOption);
+                Dialog_NodeTree dialog_NodeTree = new Dialog_NodeTree(diaNode, true, false, null);
+                Find.WindowStack.Add(dialog_NodeTree);
+                //Log.Message("DiaNode done");
                 
             });
+                        if (Methods.debug)
+            {
+                Add("FloatMenuCaptionTrusteeCollectorTest".Translate(), delegate (Pawn p)
+                {
+                    int ValuablesGain = Methods.CalculateColonyValuables();
+                    Thing thing = ThingMaker.MakeThing(ThingDefOf.Silver);
+                    thing.stackCount = ValuablesGain;
+                    string msg = ValuablesGain.ToString();
+                    //Log.Message("this is a TrusteeCollector test that fired with " + msg);
+                    DiaNode diaNode = new DiaNode(msg);
+                    DiaOption diaOption = new DiaOption("Disconnect".Translate());
+                    diaOption.resolveTree = true;
+                    diaNode.options.Add(diaOption);
+                    Dialog_NodeTree dialog_NodeTree = new Dialog_NodeTree(diaNode, true, false, null);
+                    Find.WindowStack.Add(dialog_NodeTree);
+                
+                });
+            }
             AddShiftKeyItem("FloatMenuCaptionRemoveAll".Translate(), delegate
             {
                 Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("DlgRemoveModContents".Translate(), delegate

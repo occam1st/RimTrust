@@ -32,6 +32,10 @@ namespace RimTrust.Core.Interactive
             {
                 LoadTrustFunds.LoadLegacySkills();
             }
+            if (Methods.LegacyResearch.Count.Equals(0))
+            {
+                LoadTrustFunds.LoadLegacyResearch();
+            }
         }
 
         public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn selPawn)

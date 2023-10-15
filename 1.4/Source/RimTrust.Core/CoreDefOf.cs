@@ -18,13 +18,12 @@ namespace RimTrust.Core
         public static JobDef EmptyNutrientTube;
         public static ThingDef RawRice;
         public static ThingDef RawCorn;
-        
-        //public static ThoughtDef Ascension;
-
+        public static ThingDef Plant_Arborfibre;
+        public static ThingDef NeuralImplant;
+                
         static CoreDefOf()
         {
             DefOfHelper.EnsureInitializedInCtor(typeof(CoreDefOf));
         }
-
     }
-}
+} 

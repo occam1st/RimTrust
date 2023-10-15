@@ -16,13 +16,19 @@ namespace RimTrust.Trade
             {
                 return false;
             }
+            else
+            { 
            _ = (Map)parms.target;
 
+            //Log.Message("IncidentWorker_NeuralSync CanFIreNowSub");
+            //Log.Message("Map " + (Map)parms.target);
+            
             return base.CanFireNowSub(parms) && IncidentWorker_NeuralSync.IsNeuralSyncAppropriate((Map)parms.target);
+            }
         }
         public static bool IsNeuralSyncAppropriate(Map map)
         {
-           return Methods.LegacySkills.Sum() != 0 && Methods.ColonyHasNeuralImplant(map) != false; 
+           return Methods.LegacySkills.Sum() != 0 && Methods.ColonyHasNeuralImplant(map) != false;
         }
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
@@ -35,7 +41,7 @@ namespace RimTrust.Trade
             {
                 foreach (Pawn pawn in mapint.mapPawns.FreeColonists)
                 {
-                    //Log.Message("In first foreach loop NeuralSync TryExecuteWorker, map" + map.Index);
+                    //Log.Message("In first foreach loop NeuralSync TryExecuteWorker, map: " + mapint.Index);
                     var NeuralImplantOnPawn = pawn.health?.hediffSet?.GetFirstHediffOfDef(HediffDef_Neural.NeuralImplant);
                     if (NeuralImplantOnPawn != null)
                     {

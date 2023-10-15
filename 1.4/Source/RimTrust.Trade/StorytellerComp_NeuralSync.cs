@@ -47,13 +47,13 @@ namespace RimTrust.Trade
 		private static readonly SimpleCurve NeuralSyncMTBDaysCurve = new SimpleCurve
 		{
 			{
-			new CurvePoint(0f, 3f),
-			//new CurvePoint(0f, 0.5f),
+			new CurvePoint(0f, 3f),	//actual values - median 3 days
+			//new CurvePoint(0f, 0.15f), // test values - 6 times per day
 			true
 			},
 			{
-			new CurvePoint(1f, 3f),
-			//new CurvePoint(1f, 0.5f),
+			new CurvePoint(1f, 3f),	//actual values - median 3 days
+			//new CurvePoint(1f, 0.15f), // test values - 6 times per day
 			true
 			}
 		};

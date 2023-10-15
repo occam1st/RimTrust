@@ -73,6 +73,7 @@
     <Compile Include="Interactive\Building_NutrientTube.cs" />
     <Compile Include="Interactive\Building_Terminal.cs" />
     <Compile Include="CoreDefOf.cs" />
+    <Compile Include="Interactive\CompUseEffect_AccessLegacyResearchCache.cs" />
     <Compile Include="Interactive\JobDriver_EmptyNutrientTube.cs" />
     <Compile Include="Interactive\WorkGiver_EmptyNutrientTube.cs" />
     <Compile Include="Interactive\WorkGiver_FillNutrientTube.cs" />

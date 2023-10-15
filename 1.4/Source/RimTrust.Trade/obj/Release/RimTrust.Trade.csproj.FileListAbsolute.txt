@@ -25,3 +25,4 @@ F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.4\Assemblies\RimTrust.Trade.d
 F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.4\Source\RimTrust.Trade\obj\Release\RimTrust.Trade.csproj.AssemblyReference.cache
 F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.4\Source\RimTrust.Trade\obj\Release\RimTrust.Trade.csproj.CoreCompileInputs.cache
 F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.4\Source\RimTrust.Trade\obj\Release\RimTrust.Trade.dll
+F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.4\Source\RimTrust.Trade\obj\Release\RimTrust.Trade.csproj.CopyComplete

@@ -44,6 +44,10 @@
       <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="RimTrust.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RimTrust.Core\bin\Release\RimTrust.Core.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -71,6 +75,7 @@
   <ItemGroup>
     <Compile Include="BankDefOf.cs" />
     <Compile Include="Ascension.cs" />
+    <Compile Include="CoreDefOf2.cs" />
     <Compile Include="Patches\Patch_PawnDiedOrDownedThoughtsUtility.cs" />
     <Compile Include="ThoughtDefOf.cs" />
     <Compile Include="IncidentWorker_NeuralSync.cs" />

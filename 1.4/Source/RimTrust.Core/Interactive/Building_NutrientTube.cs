@@ -377,15 +377,15 @@ namespace RimTrust.Core.Interactive
                     {
                         case "RawRPotatoes":
                             flagPotatoe = true;
-                            Log.Message("itemname: " + itemname + "flagged potatoe");
+                            //Log.Message("itemname: " + itemname + "flagged potatoe");
                             break;
                         case "RawRice":
                             flagRice = true;
-                            Log.Message("itemname: " + itemname + "flagged rice");
+                            //Log.Message("itemname: " + itemname + "flagged rice");
                             break;
                         case "RawCorn":
                             flagCorn = true;
-                            Log.Message("itemname: " + itemname + "flagged corn");
+                            //Log.Message("itemname: " + itemname + "flagged corn");
                             break;
                     }
 

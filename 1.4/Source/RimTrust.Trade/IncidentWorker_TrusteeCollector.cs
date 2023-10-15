@@ -35,7 +35,7 @@ namespace RimTrust.Trade
             Methods.UpdateTrustFunds(ValuablesGain);
             Methods.SaveTrustFunds();
             Methods.TrusteeTakeThings(Methods.TrusteeCollectorThings);
-            Log.Message("Incident TrusteeCollector fired with: " + msg);
+            //Log.Message("Incident TrusteeCollector fired with: " + msg);
             TaggedString baseLetterText = this.def.letterText.Formatted(ValuablesGain.ToString("VALUABLESGAIN"));
             TaggedString baseLetterLabel = this.def.letterLabel.Formatted(ValuablesGain.ToString("VALUABLESGAIN"));
             base.SendStandardLetter(baseLetterLabel, baseLetterText, LetterDefOf.PositiveEvent, parms, thing, Array.Empty<NamedArgument>());

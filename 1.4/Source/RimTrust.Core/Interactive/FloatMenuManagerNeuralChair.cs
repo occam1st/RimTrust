@@ -32,6 +32,7 @@ namespace RimTrust.Core.Interactive
             usesDefaultJobDriver = new Dictionary<string, bool>();
             currentAction = null;
             shiftKeyItems = new Dictionary<string, Action>();
+            //Legacy skill archive
             Add("FloatMenuCaptionLegacySkills".Translate(), delegate (Pawn p)
             {
                 string msg = "";
@@ -42,14 +43,15 @@ namespace RimTrust.Core.Interactive
                     msg += item + ": " + Methods.LegacySkills[index] + "\n";
                     index++;
                     }
-                msg += "\n\n" + "FloatMenuTotalLegacyArchive".Translate() + Methods.LegacySkills.Sum() + " (" + Math.Round(((double)Methods.LegacySkills.Sum() / (double)3564000) * 100, 4) + "%)";
+                msg += "\n\n" + "FloatMenuCaptionTotalLegacySkillArchive".Translate() + " " + Methods.LegacySkills.Sum() + " (" + Math.Round(((double)Methods.LegacySkills.Sum() / (double)3564000) * 100, 4) + "%)";
                 DiaNode diaNode = new DiaNode(msg);
-                DiaOption diaOption = new DiaOption("GameOverKeepPlaying".Translate());
+                DiaOption diaOption = new DiaOption("Disconnect".Translate());
                 diaOption.resolveTree = true;
                 diaNode.options.Add(diaOption);
                 Dialog_NodeTree dialog_NodeTree = new Dialog_NodeTree(diaNode, true, false, null);
                 Find.WindowStack.Add(dialog_NodeTree);
             }, usesDefaultJobDriver: false);
+            //Legacy skill upload
             Add("FloatMenuCaptionNeuralChair".Translate(), delegate (Pawn p)
             {
                 string selectedSkill = Methods.SelectSkillToSafeNIC(p);

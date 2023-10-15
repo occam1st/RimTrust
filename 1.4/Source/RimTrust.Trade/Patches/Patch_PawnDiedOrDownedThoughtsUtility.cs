@@ -23,11 +23,11 @@ namespace RimTrust.Trade
                     {
                         if (victim.Faction == Faction.OfPlayer && victim.Faction == pawn2.Faction && victim.HostFaction != pawn2.Faction && !victim.IsQuestLodger() && NeuralImplantOnVictim != null)
                         {
-                            Log.Message("before Prefix");
+                            //Log.Message("before Prefix");
                             outIndividualThoughts.Add(new IndividualThoughtToAdd(ThoughtDefOf.Ascension, pawn2, victim, 1f, 1f));
-                            Log.Message("Pawn :" + pawn2.Name);
-                            Log.Message("Victim :" + victim.Name);
-                            Log.Message("after Pretfix");
+                            //Log.Message("Pawn :" + pawn2.Name);
+                            //Log.Message("Victim :" + victim.Name);
+                            //Log.Message("after Pretfix");
                         }
                     }
                 }
