@@ -9,6 +9,7 @@ namespace RimTrust.Core.Interactive
     public class Building_Terminal : Building
     {
         private CompPowerTrader powerComp;
+        
 
         public bool CanUseTerminalNow
         {
@@ -34,6 +35,14 @@ namespace RimTrust.Core.Interactive
             if(Methods.LegacyResearch.Count.Equals(0))
             {
                 LoadTrustFunds.LoadLegacyResearch();
+            }
+            if (Methods.LegacyPower == 0)
+            { 
+                LoadTrustFunds.LoadLegacyPower();
+            }
+            if (Methods.LegacyPower > 0)
+            {
+                //TO-DO maybe load power comp or basePowerConsumption here
             }
         }
 

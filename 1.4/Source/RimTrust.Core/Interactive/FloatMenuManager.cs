@@ -25,27 +25,69 @@ namespace RimTrust.Core.Interactive
             usesDefaultJobDriver = new Dictionary<string, bool>();
             currentAction = null;
             shiftKeyItems = new Dictionary<string, Action>();
+            //Access TrustFunds 
             Add("FloatMenuCaptionExchange".Translate(), delegate (Pawn p)
             {
                 ExtUtil.PrepareVirtualTrade(p, new Trader_BankNoteExchange());
             }, usesDefaultJobDriver: true);
+            //Access Legacy Research
             Add("FloatMenuCaptionLegacyCache".Translate(), delegate (Pawn p)
             {
-
-                
+                string researchGainedString = "";
+                int researchGained = 0;
                 string msg = Methods.LegacyCacheMenu();
                 msg += "\n";
                 msg += Methods.UpdateColonyResearchFromLegacy(p);
+                researchGained = Methods.CountColonyResearchFromLegacy(msg, ',') - 2;
+                //Log.Message("researchGained: " + researchGained);
+                if (researchGained > 1 )
+                {
+                    researchGainedString = "gained " + researchGained + " research projects from legacy";
+                }
+               else  if (researchGained == 1)
+                {
+                    researchGainedString = "gained " + researchGained + " research project from legacy";
+                }
+                else if (researchGained == 0)
+                {
+                    msg = Methods.LegacyCacheMenuEmtpy();
+                }
                 DiaNode diaNode = new DiaNode(msg);
                 DiaOption diaOption = new DiaOption("Disconnect".Translate());
                 diaOption.resolveTree = true;
                 diaNode.options.Add(diaOption);
                 Dialog_NodeTree dialog_NodeTree = new Dialog_NodeTree(diaNode, true, false, null);
                 Find.WindowStack.Add(dialog_NodeTree);
+                if (researchGained > 0)
+                { 
+                    MoteMaker.ThrowText(p.DrawPos, p.Map, researchGainedString, Color.green, 5f); 
+                }
                 //Log.Message("DiaNode done");
-                
+
             });
-                        if (Methods.debug)
+            //Upload Legacy Power from ZPM
+            Add("FloatMenuCaptionLegacyPower".Translate(), delegate (Pawn p)
+            {
+                int power = 0;
+                power = (int)Methods.TransferZPMPower();
+                //Log.Message("Power level in FloatMenu return of TransferZPMPower: " + power);
+                if (power >= 100)
+                {
+                    string item = "You transfered ";
+                    item += power + " Wd to the legacy subspace-time";
+                    MoteMaker.ThrowText(p.DrawPos, p.Map, item, Color.green, 5f);
+                    Methods.LegacyPower += power;
+                    RimTrust.Core.Patches.UpdateXML.UpdateTLCBasePowerConsumptionFromLegacyPower();
+                    Methods.SaveLegacyPower();
+                }   
+                else
+                {
+                    string item = "Not enough Wd stored in ZPM";
+                    MoteMaker.ThrowText(p.DrawPos, p.Map, item, Color.red, 10f);
+                }
+            }, usesDefaultJobDriver: true);
+            //TrusteeCollector Incident Test
+            if (Methods.debug)
             {
                 Add("FloatMenuCaptionTrusteeCollectorTest".Translate(), delegate (Pawn p)
                 {
@@ -63,6 +105,7 @@ namespace RimTrust.Core.Interactive
                 
                 });
             }
+            //Remove all mod items on shift menu
             AddShiftKeyItem("FloatMenuCaptionRemoveAll".Translate(), delegate
             {
                 Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("DlgRemoveModContents".Translate(), delegate

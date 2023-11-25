@@ -32,10 +32,10 @@ namespace RimTrust.Trade
         {
             DefOfHelper.EnsureInitializedInCtor(typeof(HediffDef_Neural));
         }
-      /*  static void HeDiffDefOf_Ascension()
-        {
-            DefOfHelper.EnsureInitializedInCtor(typeof(HediffDef_Neural));
-        }*/
+        /*  static void HeDiffDefOf_Ascension()
+          {
+              DefOfHelper.EnsureInitializedInCtor(typeof(HediffDef_Neural));
+          }*/
     }
     /*public class ThoughtDef_Ascension : ThoughtDef
     { 
@@ -57,6 +57,7 @@ namespace RimTrust.Trade
         public static int TrustFunds;
         public static List<int> LegacySkills = new List<int>();
         public static List<float> LegacyResearch = new List<float>();
+        public static int LegacyPower;
         public static int PawnXpTotal;
         public static Pawn LegacyPawn;
         public static List<Thing> TrusteeCollectorThings = new List<Thing>();
@@ -175,9 +176,9 @@ namespace RimTrust.Trade
                 if (LegacySkills[index] != 0)
                 {
                     //Log.Message("Legacy Skill " + skills[index].def.defName.ToString() + " selected at index ( " + index + ") with xp: " + LegacySkills[index]);
-                    SkillXPBeforeLearn =  Methods.SkillXPTotal(skills[index]);
-                    
-                    
+                    SkillXPBeforeLearn = Methods.SkillXPTotal(skills[index]);
+
+
                     skills[index].Learn(Methods.LegacySkills[index] * 0.01f);
                     //Log.Message("pawn skill selected: " + skills[index].def.defName.ToString() + " after learn with xp: " + Methods.SkillXPTotal(skills[index]) + " (+" +
                     //    ((double)Methods.SkillXPTotal(skills[index])- (double)SkillXPBeforeLearn) + ")");
@@ -190,7 +191,7 @@ namespace RimTrust.Trade
         {
             int index = 0;
             string loadedResearch = "";
-            
+
             List<string> initResearchRecord = new List<string>() { "PsychoidBrewing", "TreeSowing", "Brewing", "ComplexFurniture", "PassiveCooler", "Stonecutting", "ComplexClothing",
                     "DrugProduction", "Cocoa", "Devilstrand", "CarpetMaking", "Pemmican",
                     "Smithing", "RecurveBow",
@@ -209,14 +210,14 @@ namespace RimTrust.Trade
                     500, 1000, 800, 800, 500,
                     700, 400,
                     400, 600, 1000, 500,
-                    600, 300, 800, 700, 300, 400, 600, 600,
                     400, 600, 600,
-                    1600, 400, 700, 700, 400, 600, 500, 600, 700, 1000, 500, 600, 500, 3200, 600, 300,
+                    1600, 400, 700, 700, 400, 600, 500, 600, 700, 1000, 500, 600,
+                    500, 3200, 600, 300,
                     1000, 300, 600, 500, 1200, 2000, 500, 1000, 500, 800,
                     3000, 2000, 1200, 1200, 4000, 1000, 1000, 1500,
                     2000, 1000,
                     1400, 1600, 2600,
-                    4000, 2500, 4000, 4000, 2000, 6000, 6000, 3000, 2000, 3000,
+                    4000, 2500, 4000, 4000, 2000, 6000, 6000, 3000, 2000, 3000, 3000,
                     4000, 2800, 6000, 6000, 3000, 4000};
 
             foreach (string item in initResearchRecord)
@@ -228,19 +229,25 @@ namespace RimTrust.Trade
                         int ResearchValueGained = (int)(LegacyResearch[index] - (Find.ResearchManager.GetProgress(ResearchProjectDef.Named(item))));
 
                         if (LegacyResearch[index] == initResearchRecordValue[index])
-                        { 
-                            
-                            Find.ResearchManager.FinishProject(ResearchProjectDef.Named(item),false,null,true);
+                        {
+
+                            Find.ResearchManager.FinishProject(ResearchProjectDef.Named(item), false, null, true);
                             //Log.Message("LegacyResearch[index] == initResearchRecordValue[index]");
                             //Log.Message(item + " gained " + ResearchValueGained + " research points");
                             loadedResearch += item + "(" + ResearchValueGained + ")" + ", ";
                         }
-                    }                   
+                    }
                 }
 
                 index++;
             }
             return loadedResearch;
+        }
+
+        public static int CountColonyResearchFromLegacy(string loadedResearchString, char toFind)
+        {
+            //Log.Message("loaded ResearchString: " + loadedResearchString);
+            return loadedResearchString.Count(t => t == toFind);
         }
         public static void SaveTrustFunds()
         {
@@ -267,7 +274,7 @@ namespace RimTrust.Trade
                 ScribeMetaHeaderUtility.WriteMetaHeader();
                 //Log.Message("SaveTrustFunds");
                 Scribe_Values.Look<int>(ref TrustFunds, "TrustFunds", 0);
-
+                
             }));
         }
 
@@ -326,7 +333,7 @@ namespace RimTrust.Trade
             str1.Replace('/', '\\');
             if (!System.IO.Directory.Exists(str1))
             {
-               // Log.Message("creating folder : " + str1);
+                // Log.Message("creating folder : " + str1);
                 System.IO.Directory.CreateDirectory(str1);
                 //Log.Message("folder created successfully");
             }
@@ -340,8 +347,8 @@ namespace RimTrust.Trade
                 float researchValue = 0;
                 int index = 0;
 
-                
-                
+
+
                 List<string> initResearchRecord = new List<string>() { "PsychoidBrewing", "TreeSowing", "Brewing", "ComplexFurniture", "PassiveCooler", "Stonecutting", "ComplexClothing",
                     "DrugProduction", "Cocoa", "Devilstrand", "CarpetMaking", "Pemmican",
                     "Smithing", "RecurveBow",
@@ -368,11 +375,40 @@ namespace RimTrust.Trade
                 }
             }));
         }
+        public static void SaveLegacyPower()
+        {
+            //Log.Message("start SaveLegacyPower");
+
+            string TrustName = "";
+            if (TrustName == "")
+            {
+                TrustName = "default";
+            }
+
+            string str1 = System.IO.Path.Combine(GenFilePaths.SaveDataFolderPath, "TrustFunds");
+            str1.Replace('/', '\\');
+            if (!System.IO.Directory.Exists(str1))
+            {
+                //Log.Message("creating folder : " + str1);
+                System.IO.Directory.CreateDirectory(str1);
+                //Log.Message("folder created successfully");
+            }
+
+            string orstr2 = System.IO.Path.Combine(str1, TrustName);
+            string str2 = orstr2 + ".rwlp";
+
+            SafeSaver.Save(str2, "RWLP", (Action)(() =>
+            {
+                ScribeMetaHeaderUtility.WriteMetaHeader();
+                //Log.Message("SaveLegacyPower");
+                Scribe_Values.Look<int>(ref LegacyPower, "LegacyPower", 0);
+            }));
+        }
 
         public static void LegacyResearchMessage()
         {
             //if (debug)
-                //Log.Message("Legacy Research Message start");
+            //Log.Message("Legacy Research Message start");
             string msg = "";
             int index = 0;
             List<string> initResearchRecord = new List<string>() { "PsychoidBrewing", "TreeSowing", "Brewing", "ComplexFurniture", "PassiveCooler", "Stonecutting", "ComplexClothing",
@@ -389,15 +425,15 @@ namespace RimTrust.Trade
                     "MultiAnalyzer", "VitalsMonitor", "Fabrication", "AdvancedFabrication", "Cryptosleep", "ReconArmor", "PoweredArmor", "ChargedShot", "Bionics", "SniperTurret", "RocketswarmLauncher",
                     "ShipBasics", "ShipCryptosleep", "ShipReactor", "ShipEngine", "ShipComputerCore", "ShipSensorCluster" };
             //if (debug)
-                //Log.Message("Legacy Research Message after list initiate before foreach loop");
+            //Log.Message("Legacy Research Message after list initiate before foreach loop");
             foreach (string item in initResearchRecord)
             {
                 //if (debug)
-                    //Log.Message("Legacy Research Message foreach loop " + index);
+                //Log.Message("Legacy Research Message foreach loop " + index);
                 //if (debug)
-                    //Log.Message("Legacy Research #" + index + " :" + item + " with " + Methods.LegacyResearch[index]);
+                //Log.Message("Legacy Research #" + index + " :" + item + " with " + Methods.LegacyResearch[index]);
                 if (Methods.LegacyResearch[index] != 0)
-                msg += item + ": " + Methods.LegacyResearch[index] + "\n";
+                    msg += item + ": " + Methods.LegacyResearch[index] + "\n";
                 index++;
             }
             int totalResearchXP = 123700;
@@ -495,16 +531,16 @@ namespace RimTrust.Trade
             double skillXPtotallearned = Methods.SkillXPTotal(SkillRecord);
             double xpmult = 0.075;
             if (tier != 1 && tier != 2)
-                { 
-                    tier = 1; 
-                }
+            {
+                tier = 1;
+            }
             if (!Methods.LegacySkills.Count.Equals(0))
             {
                 //Log.Message("UpdateLegacySkills before skillXPtolearn = skillXPtotallearned - LegacySkills[index]");
                 //Log.Message("UpdateLegacySkills skillXPtotallearned = " + skillXPtotallearned + " and LegacySkills[index] " + LegacySkills[index]);
                 double skillXPtolearn = skillXPtotallearned - LegacySkills[index];
                 //Log.Message("UpdateLegacySkills skillXPtolearn " + skillXPtolearn);
-                
+
                 if (skillXPtolearn > 0)
                 {
                     double skillSafePercentage = (Math.Pow(((double)(maxSkillXP - LegacySkills[index]) / maxSkillXP), 2));
@@ -536,56 +572,54 @@ namespace RimTrust.Trade
             //Log.Message("UpdateLegacyResearch Methods.LegacySkills.Count equals " + Methods.LegacyResearch.Count);
             if (!Methods.LegacyResearch.Count.Equals(0))
             {
-                List<string> initResearchRecord = new List<string>() { "PsychoidBrewing", "TreeSowing", "Brewing", "ComplexFurniture", "PassiveCooler", "Stonecutting", "ComplexClothing", 
+                List<string> initResearchRecord = new List<string>() { "PsychoidBrewing", "TreeSowing", "Brewing", "ComplexFurniture", "PassiveCooler", "Stonecutting", "ComplexClothing",
                     "DrugProduction", "Cocoa", "Devilstrand", "CarpetMaking", "Pemmican",
                     "Smithing", "RecurveBow",
-                    "PsychiteRefining", "WakeUpProduction", "GoJuiceProduction", "PenoxycylineProduction", 
+                    "PsychiteRefining", "WakeUpProduction", "GoJuiceProduction", "PenoxycylineProduction",
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
-                    "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights", 
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett", 
+                    "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
-                    "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons", 
+                    "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
                     "MultiAnalyzer", "VitalsMonitor", "Fabrication", "AdvancedFabrication", "Cryptosleep", "ReconArmor", "PoweredArmor", "ChargedShot", "Bionics", "SniperTurret", "RocketswarmLauncher",
                     "ShipBasics", "ShipCryptosleep", "ShipReactor", "ShipEngine", "ShipComputerCore", "ShipSensorCluster" };
 
-                List<int> initResearchRecordValue = new List<int>() { 500, 1000, 400, 300, 400, 300, 600, 
+                List<int> initResearchRecordValue = new List<int>() { 500, 1000, 400, 300, 400, 300, 600,
                     500, 1000, 800, 800, 500,
                     700, 400,
                     400, 600, 1000, 500,
-                    600, 300, 800, 700, 300, 400, 600, 600,
-                    400, 600, 600, 
-                    1600, 400, 700, 700, 400, 600, 500, 600, 700, 1000, 500, 600, 500, 3200, 600, 300, 
-                    1000, 300, 600, 500, 1200, 2000, 500, 1000, 500, 800, 
-                    3000, 2000, 1200, 1200, 4000, 1000, 1000, 1500, 
-                    2000, 1000, 
+                    400, 600, 600,
+                    1600, 400, 700, 700, 400, 600, 500, 600, 700, 1000, 500, 
+                    600, 500, 3200, 600, 300,
+                    1000, 300, 600, 500, 1200, 2000, 500, 1000, 500, 800,
+                    3000, 2000, 1200, 1200, 4000, 1000, 1000, 1500,
+                    2000, 1000,
                     1400, 1600, 2600,
-                    4000, 2500, 4000, 4000, 2000, 6000, 6000, 3000, 2000, 3000, 
+                    4000, 2500, 4000, 4000, 2000, 6000, 6000, 3000, 2000, 3000, 3000,
                     4000, 2800, 6000, 6000, 3000, 4000};
 
                 if (!p.skills.skills[researchSkillindex].TotallyDisabled)
                 {
                     //Log.Message("Research Skill for " + p.Name.ToString() + " : " + p.skills.skills[researchSkillindex].ToString());
+                    //Log.Message("start of foreach loop in UpdateLegacyResearch");
 
                     foreach (string item in initResearchRecord)
                     {
-                    //Log.Message("start of foreach loop in UpdateLegacyResearch");
-                                       
-                    
                         researchValue = Find.ResearchManager.GetProgress(ResearchProjectDef.Named(item));
                         if (!initResearchRecord.Contains(item))
-                            {
+                        {
                             break;
-                            }
+                        }
                         else
-                            {
+                        {
                             if (researchValue != 0)
-                                {
+                            {
                                 //Log.Message("LegacyResearch for " + item + " at index " + index + " equals " + LegacyResearch[index]);
                                 //Log.Message("researchValue equals " + researchValue);
                                 if (LegacyResearch[index] < initResearchRecordValue[index] && researchValue == initResearchRecordValue[index])
-                                    {
+                                {
                                     researchPercentageSaved = (LegacyResearch[index] / initResearchRecordValue[index]) * 100;
                                     pawnResearchFactor = p.GetStatValueForPawn(StatDefOf.ResearchSpeed, p);
                                     //Log.Message("Pawn " + p.Name.ToString() + " has ResearchspeedFactor of " + pawnResearchFactor);
@@ -594,9 +628,9 @@ namespace RimTrust.Trade
                                     //Log.Message("(initResearchRecordValue[index] / 500) equals " + initResearchRecordValue[index] + " / 500");
                                     //Log.Message("(initResearchRecordValue[index] / 500) equals " + initResearchRecordValue[index] / 500);
                                     if (LegacyResearch[index] == 0)
-                                        {
+                                    {
                                         LegacyResearch[index] = 1;
-                                        }
+                                    }
                                     float researchToSafe = (float)Math.Round((((initResearchRecordValue[index] - LegacyResearch[index]) * (researchmult + researchmult * tier)) / (initResearchRecordValue[index] / 500f)), 0);
                                     //Log.Message("foreach UpdateLegacyResearch researchToSafe equals " + researchToSafe);
                                     float researchToSafeWithSkill = (float)Math.Round((researchToSafe * pawnResearchFactor) / 1.5f, 0);
@@ -605,27 +639,27 @@ namespace RimTrust.Trade
                                     LegacyResearch[index] += researchToSafeWithSkill;
                                     //Log.Message("foreach UpdateLegacyResearch with " + item + " and " + researchValue + " researchValue and " + researchToSafeWithSkill + " researchtoSafeWithSkill");
                                     //Log.Message("hitting break with " + item);
-                                    researchPercentageSaved = (LegacyResearch[index] / initResearchRecordValue[index]) * 100;
+                                    //researchPercentageSaved = (LegacyResearch[index] / initResearchRecordValue[index]) * 100;
                                     if (researchPercentageSaved >= 99.5)
-                                        {
+                                    {
                                         LegacyResearch[index] = initResearchRecordValue[index];
                                         researchPercentageSaved = 100;
-                                        }
-                                    if (researchPercentageSaved == 100)
-                                        {
-                                        MoteMaker.ThrowText(p.DrawPos, p.Map, item + " research archive completed", Color.green, 5f);
-                                        }
-                                    else
-                                        {
-                                        MoteMaker.ThrowText(p.DrawPos, p.Map, item + " +" + (int)researchToSafeWithSkill + " research points added, " + (int)researchPercentageSaved + "% in total archived", Color.green, 5f);
-                                        }
-                                    break;
                                     }
+                                    if (researchPercentageSaved == 100)
+                                    {
+                                        MoteMaker.ThrowText(p.DrawPos, p.Map, item + " research archive completed", Color.green, 5f);
+                                    }
+                                    else
+                                    {
+                                        MoteMaker.ThrowText(p.DrawPos, p.Map, item + " +" + (int)researchToSafeWithSkill + " research points added, " + (int)researchPercentageSaved + "% in total archived", Color.green, 5f);
+                                    }
+                                    break;
                                 }
                             }
+                        }
                         index++;
                     }
-                }              
+                }
             }
         }
 
@@ -707,6 +741,11 @@ namespace RimTrust.Trade
                 }
             }));
         }
+
+        public static void InitiateLegacyPowerSave()
+        {
+            SaveLegacyPower();
+        }
         public static void NicOverdoseToPawn(Pawn p)
         {
             BodyPartRecord part = p.RaceProps.body.corePart;
@@ -735,7 +774,7 @@ namespace RimTrust.Trade
 
         public static int CalculateColonyValuables()
         {
-            string test = "";
+            string colonyValue = "";
             int totalValue = 0;
             string end = "";
             if (Find.CurrentMap.IsPlayerHome)
@@ -747,11 +786,11 @@ namespace RimTrust.Trade
                         CompQuality compQuality = placedArt.GetInnerIfMinified().TryGetComp<CompQuality>();
                         if (compQuality.Quality != QualityCategory.Awful && compQuality.Quality != QualityCategory.Poor && compQuality.Quality != QualityCategory.Normal)
                         {
-                            test += placedArt.def.defName;
-                            test += " (placed): ";
-                            test += placedArt.MarketValue * placedArt.stackCount;
+                            colonyValue += placedArt.def.defName;
+                            colonyValue += " (placed): ";
+                            colonyValue += placedArt.MarketValue * placedArt.stackCount;
                             totalValue += (int)(placedArt.stackCount * placedArt.MarketValue);
-                            test += "\n";
+                            colonyValue += "\n";
                             TrusteeCollectorThings.Add(placedArt);
                         }
                     }
@@ -761,11 +800,11 @@ namespace RimTrust.Trade
                 {
                     if (item.def.defName == "Silver" || item.def.defName == "Gold" || item.def.defName == "BankNote")
                     {
-                        test += item.def.defName;
-                        test += ": ";
-                        test += item.MarketValue * item.stackCount;
+                        colonyValue += item.def.defName;
+                        colonyValue += ": ";
+                        colonyValue += item.MarketValue * item.stackCount;
                         totalValue += (int)(item.stackCount * item.MarketValue);
-                        test += "\n";
+                        colonyValue += "\n";
                         TrusteeCollectorThings.Add(item);
                     }
                     if (item.GetInnerIfMinified().def.defName.StartsWith("Sculpture"))
@@ -773,19 +812,19 @@ namespace RimTrust.Trade
                         CompQuality compQuality = item.GetInnerIfMinified().TryGetComp<CompQuality>();
                         if (compQuality.Quality != QualityCategory.Awful && compQuality.Quality != QualityCategory.Poor && compQuality.Quality != QualityCategory.Normal)
                         {
-                            test += item.GetInnerIfMinified().def.defName;
-                            test += ": ";
-                            test += compQuality.Quality.GetLabelShort();
-                            test += ": ";
-                            test += item.GetInnerIfMinified().MarketValue;
+                            colonyValue += item.GetInnerIfMinified().def.defName;
+                            colonyValue += ": ";
+                            colonyValue += compQuality.Quality.GetLabelShort();
+                            colonyValue += ": ";
+                            colonyValue += item.GetInnerIfMinified().MarketValue;
                             totalValue += (int)(item.GetInnerIfMinified().stackCount * item.GetInnerIfMinified().MarketValue);
-                            test += "\n";
+                            colonyValue += "\n";
                             TrusteeCollectorThings.Add(item);
                         }
                     }
                 }
             }
-            end = test + totalValue;
+            end = colonyValue + totalValue;
             if (debug)
             {
                 //Log.Message(end);
@@ -835,84 +874,143 @@ namespace RimTrust.Trade
         {
             string text = "";
 
-            text = "Welcome decendant to the interstaller vault trust service!";
+            text = "Welcome decendant to the intragalactic vault trust services™ !";
             text += "\n";
             text += "\n";
             text += "You have accumulated riches, knowledge and have proven to be a skilled companion.";
             text += "\n";
-            text += "You will receive previous research achievments as progress. Use it wisely.";
+            text += "In order to progress further, you will receive previous research achievments as a mark of respect. Use it wisely.";
             text += "\n";
-            
+
+            return text;
+        }
+        public static string LegacyCacheMenuEmtpy()
+        {
+            string text = "";
+
+            text = "Welcome traveller! This is the landing page of the 'banks across galaxies' (working title)";
+            text += "\n";
+            text += "\n";
+            text += "Currently we have no information stored that expands your (limited) knowledge.";
+            text += "\n";
+            text += "\n";
+            text += "Please return at a later stage, once you have achieved something, that you can tell your grandchildren about.";
+            text += "\n";
+            text += "\n";
+            text += "signed: founder of B.A.G.s";
+            text += "\n";
+            text += "   ___";
+            text += "\n";
+            text += " | BAG |";
+            text += "\n";
+            text += "  -----";
+            text += "\n";
+            text += "//     \\";
+            text += "\n";
+            text += "||     ||";
+            text += "\n";
+            text += "||     ||";
+            text += "\n";
+
             return text;
         }
 
-    }
-     
-    public class LoadTrustFunds
-    {
 
-        static string TrustName;
-        static string LegacySkillsName;
-        static string LegacyResearchName;
+        public static float TransferZPMPower()
+        {
+            float powerStored = 0f;
+            int ZPMi = 1;
+
+            if (Find.CurrentMap.IsPlayerHome)
+            {
+                foreach (Thing ZPM in Find.CurrentMap.listerThings.AllThings)
+                {
+                    
+                    if (ZPM.def.defName.StartsWith("ZeroPointModule"))
+                    {
+                        
+                        CompPowerBattery comp = ZPM.TryGetComp<CompPowerBattery>();
+                        //Log.Message("Found ZPM no. " + ZPMi + " with power level " + comp.StoredEnergy +" at position " + ZPM.Position);
+                        if (comp.StoredEnergy >= 10000f)
+                        {
+                            powerStored += comp.StoredEnergy;
+                            comp.DrawPower(comp.StoredEnergy);
+                        }
+                        ZPMi++;
+                    }
+                }
+            }
+            //Log.Message("returning powerStored in TransferZPMPower with value : " + powerStored);
+            return powerStored;
+        }
+    }
+
+        public class LoadTrustFunds
+        {
+
+            static string TrustName;
+            static string LegacySkillsName;
+            static string LegacyResearchName;
+            static string LegacyPowerName;
 
 
         public static void LoadTrust()
-        {
-            //Log.Message("Loading trust");
-            TrustName = "default";
-            string file = System.IO.Path.Combine(System.IO.Path.Combine(GenFilePaths.SaveDataFolderPath, "TrustFunds"), TrustName + ".rwtf");
-            if (!System.IO.File.Exists(file))
             {
-                //Log.Error("File Doesnt exist");
-                return;
-            }
-
-            Scribe.loader.InitLoading(file);
-            Scribe_Values.Look<int>(ref Methods.TrustFunds, "TrustFunds", 0);
-            Scribe.loader.FinalizeLoading();
-        }
-        public static void LoadLegacySkills()
-        {
-            //Log.Message("Loading Legacy Skills");
-            LegacySkillsName = "default";
-            string file = System.IO.Path.Combine(System.IO.Path.Combine(GenFilePaths.SaveDataFolderPath, "TrustFunds"), LegacySkillsName + ".rwls");
-            if (!System.IO.File.Exists(file))
-            {
-                //Log.Message("File Doesnt exist.. creating..");
-                Methods.InitiateLegacySkillSave();
-            }
-            
-            List<string> initSkillRecord = new List<string>() { "Shooting", "Melee", "Construction", "Mining", "Cooking", "Plants", "Animals", "Crafting", "Artistic", "Medical", "Social", "Intellectual" };
-            //Log.Message("initiate loading LegacySkills");
-            int index = 0;
-            Methods.LegacySkills = new List<int> { };
-
-            foreach (string item in initSkillRecord)
-            {
-                int temploadedxp = 0;
+                //Log.Message("Loading trust");
+                TrustName = "default";
+                string file = System.IO.Path.Combine(System.IO.Path.Combine(GenFilePaths.SaveDataFolderPath, "TrustFunds"), TrustName + ".rwtf");
+                if (!System.IO.File.Exists(file))
+                {
+                    //Log.Error("File Doesnt exist");
+                    return;
+                }
 
                 Scribe.loader.InitLoading(file);
-                Scribe_Values.Look<int>(ref temploadedxp, item, 0);
+                Scribe_Values.Look<int>(ref Methods.TrustFunds, "TrustFunds", 0);
                 Scribe.loader.FinalizeLoading();
-                //Log.Message("load LegacySkills at index " + index);
-                //Log.Message("load LegacySkill " + item + "from index " + index + " with loaded xp " + temploadedxp);
-                
-                Methods.LegacySkills.Add(temploadedxp);
-                index++;
             }
-        }
-        public static void LoadLegacyResearch()
-        {
-            //Log.Message("Loading Legacy Research");
-            LegacyResearchName = "default";
-            string file = System.IO.Path.Combine(System.IO.Path.Combine(GenFilePaths.SaveDataFolderPath, "TrustFunds"), LegacyResearchName + ".rwlr");
-            if (!System.IO.File.Exists(file))
+            public static void LoadLegacySkills()
             {
-                //Log.Message("File Doesnt exist.. creating..");
-                Methods.InitiateLegacyResearchSave();
-            }
+                //Log.Message("Loading Legacy Skills");
+                LegacySkillsName = "default";
+                string file = System.IO.Path.Combine(System.IO.Path.Combine(GenFilePaths.SaveDataFolderPath, "TrustFunds"), LegacySkillsName + ".rwls");
+                if (!System.IO.File.Exists(file))
+                {
+                    //Log.Message("File Doesnt exist.. creating..");
+                    Methods.InitiateLegacySkillSave();
+                }
 
-            List<string> initResearchRecord = new List<string>() { "PsychoidBrewing", "TreeSowing", "Brewing", "ComplexFurniture", "PassiveCooler", "Stonecutting", "ComplexClothing",
+                List<string> initSkillRecord = new List<string>() { "Shooting", "Melee", "Construction", "Mining", "Cooking", "Plants", "Animals", "Crafting", "Artistic", "Medical", "Social", "Intellectual" };
+                //Log.Message("initiate loading LegacySkills");
+                int index = 0;
+                Methods.LegacySkills = new List<int> { };
+
+                foreach (string item in initSkillRecord)
+                {
+                    int temploadedxp = 0;
+
+                    Scribe.loader.InitLoading(file);
+                    Scribe_Values.Look<int>(ref temploadedxp, item, 0);
+                    Scribe.loader.FinalizeLoading();
+                    //Log.Message("load LegacySkills at index " + index);
+                    //Log.Message("load LegacySkill " + item + "from index " + index + " with loaded xp " + temploadedxp);
+
+                    Methods.LegacySkills.Add(temploadedxp);
+                    index++;
+                }
+            }
+            public static void LoadLegacyResearch()
+            {
+                //Log.Message("Loading Legacy Research");
+                LegacyResearchName = "default";
+                string file = System.IO.Path.Combine(System.IO.Path.Combine(GenFilePaths.SaveDataFolderPath, "TrustFunds"), LegacyResearchName + ".rwlr");
+                if (!System.IO.File.Exists(file))
+                {
+                    //Log.Message("File Doesnt exist.. creating..");
+                    Methods.InitiateLegacyResearchSave();
+                }
+
+                List<string> initResearchRecord = new List<string>() { "PsychoidBrewing", "TreeSowing", "Brewing", "ComplexFurniture", "PassiveCooler", "Stonecutting", "ComplexClothing",
                     "DrugProduction", "Cocoa", "Devilstrand", "CarpetMaking", "Pemmican",
                     "Smithing", "RecurveBow",
                     "PsychiteRefining", "WakeUpProduction", "GoJuiceProduction", "PenoxycylineProduction",
@@ -925,21 +1023,38 @@ namespace RimTrust.Trade
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
                     "MultiAnalyzer", "VitalsMonitor", "Fabrication", "AdvancedFabrication", "Cryptosleep", "ReconArmor", "PoweredArmor", "ChargedShot", "Bionics", "SniperTurret", "RocketswarmLauncher",
                     "ShipBasics", "ShipCryptosleep", "ShipReactor", "ShipEngine", "ShipComputerCore", "ShipSensorCluster" };
-            //Log.Message("initiate loading LegacyResearch");
-            int index = 0;
-            Methods.LegacyResearch = new List<float> { };
+                //Log.Message("initiate loading LegacyResearch");
+                int index = 0;
+                Methods.LegacyResearch = new List<float> { };
 
-            foreach (string item in initResearchRecord)
+                foreach (string item in initResearchRecord)
+                {
+                    float temploadedresearch = 0;
+
+                    Scribe.loader.InitLoading(file);
+                    Scribe_Values.Look<float>(ref temploadedresearch, item, 0);
+                    Scribe.loader.FinalizeLoading();
+
+                    Methods.LegacyResearch.Add(temploadedresearch);
+                    index++;
+                }
+            }
+
+            public static void LoadLegacyPower()
             {
-                float temploadedresearch = 0;
+                //Log.Message("Loading legacy power");
+                LegacyPowerName = "default";
+                string file = System.IO.Path.Combine(System.IO.Path.Combine(GenFilePaths.SaveDataFolderPath, "TrustFunds"), LegacyPowerName + ".rwlp");
+                if (!System.IO.File.Exists(file))
+                {
+                    //Log.Message("File " + file + " doesn't exist.. creating...");
+                    Methods.InitiateLegacyPowerSave();
+                    return;
+                }
 
                 Scribe.loader.InitLoading(file);
-                Scribe_Values.Look<float>(ref temploadedresearch, item, 0);
+                Scribe_Values.Look<int>(ref Methods.LegacyPower, "LegacyPower", 0);
                 Scribe.loader.FinalizeLoading();
-
-                Methods.LegacyResearch.Add(temploadedresearch);
-                index++;
             }
         }
-    }
 }

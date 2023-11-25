@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <ThingDef>
     <defName>TrustLedgerConsole</defName>
@@ -8,8 +8,8 @@
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
     <selectable>true</selectable>
     <drawerType>MapMeshAndRealTime</drawerType>
-	<graphicData>						   					
-	  <texPath>Things/Building/Misc/RimTrust_TLC</texPath>
+    <graphicData>
+      <texPath>Things/Building/Misc/RimTrust_TLC</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(2.8,2.8)</drawSize>
     </graphicData>
@@ -26,9 +26,9 @@
       <Flammability>0.3</Flammability>
       <Mass>35</Mass>
     </statBases>
-	<description>Allows remote access to your trust ledger.</description>			 
+    <description>Allows remote access to your trust ledger.</description>
     <size>(1,1)</size>
-    <costList>							 
+    <costList>
       <Steel>75</Steel>
       <Gold>10</Gold>
       <ComponentIndustrial>6</ComponentIndustrial>
@@ -46,9 +46,9 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>200</basePowerConsumption>
+        <basePowerConsumption>157</basePowerConsumption>
       </li>
-      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Flickable" />
       <li Class="CompProperties_Glower">
         <glowRadius>1.8</glowRadius>
         <glowColor>(127,255,255,0)</glowColor>
@@ -60,7 +60,7 @@
     </researchPrerequisites>
     <filthLeaving>Filth_RubbleBuilding</filthLeaving>
     <minifiedDef>MinifiedThing</minifiedDef>
-	<thingCategories>
+    <thingCategories>
       <li>BuildingsMisc</li>
     </thingCategories>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>

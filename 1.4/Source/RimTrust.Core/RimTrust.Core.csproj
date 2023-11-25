@@ -73,7 +73,7 @@
     <Compile Include="Interactive\Building_NutrientTube.cs" />
     <Compile Include="Interactive\Building_Terminal.cs" />
     <Compile Include="CoreDefOf.cs" />
-    <Compile Include="Interactive\CompUseEffect_AccessLegacyResearchCache.cs" />
+    <Compile Include="Interactive\Building_ZPM.cs" />
     <Compile Include="Interactive\JobDriver_EmptyNutrientTube.cs" />
     <Compile Include="Interactive\WorkGiver_EmptyNutrientTube.cs" />
     <Compile Include="Interactive\WorkGiver_FillNutrientTube.cs" />
@@ -86,6 +86,7 @@
     <Compile Include="Interactive\JobDriver_UseNeuralChair.cs" />
     <Compile Include="Interactive\JobDriver_UseTerminal.cs" />
     <Compile Include="ModContentRemover.cs" />
+    <Compile Include="Patches\Patch_TLCBasePowerConsumptionLegacyPower.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -94,5 +95,6 @@
       <Name>RimTrust.Trade</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
