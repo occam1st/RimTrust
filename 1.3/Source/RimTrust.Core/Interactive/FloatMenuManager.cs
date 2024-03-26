@@ -70,7 +70,7 @@ namespace RimTrust.Core.Interactive
                     if (usesDefaultJobDriver[pair.Key])
                     {
                         currentAction = pair.Value;
-                        Job job = new Job(CoreDefOf.UseBankTerminal, target);
+                        Job job = new Job(CoreDefOf.UseTrustLedgerConsole, target);
                         pawn.jobs.TryTakeOrderedJob(job);
                     }
                     else

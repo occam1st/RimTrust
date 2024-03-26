@@ -6,21 +6,17 @@ using Verse.AI;
 
 namespace RimTrust.Core.Interactive
 {
-    public class Building_Terminal : Building
+    public class Building_TrustLedgerConsole : Building
     {
         private CompPowerTrader powerComp;
         
 
-        public bool CanUseTerminalNow
+        public bool CanUseTrustLedgerConsoleNow
         {
             get
-            {
-                if (!base.Spawned || !base.Map.gameConditionManager.ConditionIsActive(GameConditionDefOf.SolarFlare))
                 {
-                    return powerComp.PowerOn;
+                    return (!base.Spawned || !base.Map.gameConditionManager.ElectricityDisabled(base.Map)) && (this.powerComp == null || this.powerComp.PowerOn);
                 }
-                return false;
-            }
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -56,7 +52,7 @@ namespace RimTrust.Core.Interactive
                 item
             };
             }
-            if (base.Spawned && base.Map.gameConditionManager.ConditionIsActive(GameConditionDefOf.SolarFlare))
+            if (base.Spawned && base.Map.gameConditionManager.ElectricityDisabled(base.Map))
             {
                 FloatMenuOption item2 = new FloatMenuOption("CannotUseSolarFlare".Translate(), null);
                 return new List<FloatMenuOption>
@@ -80,7 +76,7 @@ namespace RimTrust.Core.Interactive
                 item4
             };
             }
-            return FloatMenuManager.RequestBuild(this, selPawn);
+            return FloatMenuManagerTLC.RequestBuild(this, selPawn);
         }
     }
 }

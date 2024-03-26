@@ -9,7 +9,7 @@ using Verse.AI;
 
 namespace RimTrust.Core.Interactive
 {
-    public static class FloatMenuManager
+    public static class FloatMenuManagerTLC
     {
         internal static Dictionary<string, Action<Pawn>> rawItems;
 
@@ -19,12 +19,13 @@ namespace RimTrust.Core.Interactive
 
         internal static Dictionary<string, Action> shiftKeyItems;
 
-        static FloatMenuManager()
+        static FloatMenuManagerTLC()
         {
             rawItems = new Dictionary<string, Action<Pawn>>();
             usesDefaultJobDriver = new Dictionary<string, bool>();
             currentAction = null;
             shiftKeyItems = new Dictionary<string, Action>();
+            Log.Message("New FloatMenuManagerTLC rewrite");
             //Access TrustFunds 
             Add("FloatMenuCaptionExchange".Translate(), delegate (Pawn p)
             {
@@ -123,7 +124,7 @@ namespace RimTrust.Core.Interactive
         public static void Add(string str, Action<Pawn> action, bool usesDefaultJobDriver = false)
         {
             rawItems.Add(str, action);
-            FloatMenuManager.usesDefaultJobDriver.Add(str, usesDefaultJobDriver);
+            FloatMenuManagerTLC.usesDefaultJobDriver.Add(str, usesDefaultJobDriver);
         }
 
         public static void AddShiftKeyItem(string str, Action action)
@@ -148,7 +149,7 @@ namespace RimTrust.Core.Interactive
                     if (usesDefaultJobDriver[pair.Key])
                     {
                         currentAction = pair.Value;
-                        Job job = new Job(CoreDefOf.UseBankTerminal, target);
+                        Job job = new Job(CoreDefOf.UseTrustLedgerConsole, target);
                         pawn.jobs.TryTakeOrderedJob(job);
                     }
                     else

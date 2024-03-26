@@ -27,4 +27,5 @@ Final confirmation : Are you sure you want to remove all mod contents?</DlgRemov
   <FloatMenuCaptionTotalLegacyResearchArchive>total legacy research archive:</FloatMenuCaptionTotalLegacyResearchArchive>
   <FloatMenuCaptionLegacyCache>Legacy research download</FloatMenuCaptionLegacyCache>
   <FloatMenuCaptionLegacyPower>Legacy energy transfer</FloatMenuCaptionLegacyPower>
+  <FloatMenuCaptionLegacyCacheSmall>Legacy starter research download</FloatMenuCaptionLegacyCacheSmall>
 </LanguageData>

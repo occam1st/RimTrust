@@ -3,7 +3,7 @@
   <ThingDef>
     <defName>TrustLedgerConsole</defName>
     <label>Trust Ledger Console</label>
-    <thingClass>RimTrust.Core.Interactive.Building_Terminal</thingClass>
+    <thingClass>RimTrust.Core.Interactive.Building_TrustLedgerConsole</thingClass>
     <category>Building</category>
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
     <selectable>true</selectable>
@@ -46,7 +46,7 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>157</basePowerConsumption>
+        <basePowerConsumption>129</basePowerConsumption>
       </li>
       <li Class="CompProperties_Flickable" />
       <li Class="CompProperties_Glower">

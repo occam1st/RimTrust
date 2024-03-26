@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <JobDef>
-    <defName>UseBankTerminal</defName>
-    <driverClass>RimTrust.Core.Interactive.JobDriver_UseTerminal</driverClass>
+    <defName>UseTrustLedgerConsole</defName>
+    <driverClass>RimTrust.Core.Interactive.JobDriver_UseTrustLedgerConsole</driverClass>
     <reportString>Using RimTrust TLC console.</reportString>
   </JobDef>
   <JobDef>
@@ -25,4 +25,4 @@
     <driverClass>RimTrust.Core.Interactive.JobDriver_EmptyNutrientTube</driverClass>
     <reportString>Emptying nutrient tube.</reportString>
   </JobDef>
-</Defs>
+</Defs>	

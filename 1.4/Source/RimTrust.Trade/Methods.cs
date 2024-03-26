@@ -211,8 +211,8 @@ namespace RimTrust.Trade
                     700, 400,
                     400, 600, 1000, 500,
                     400, 600, 600,
-                    1600, 400, 700, 700, 400, 600, 500, 600, 700, 1000, 500, 600,
-                    500, 3200, 600, 300,
+                    1600, 400, 700, 700, 400, 600, 500, 600, 700, 1000, 500, 
+                    600, 500, 3200, 600, 300,
                     1000, 300, 600, 500, 1200, 2000, 500, 1000, 500, 800,
                     3000, 2000, 1200, 1200, 4000, 1000, 1000, 1500,
                     2000, 1000,
@@ -244,9 +244,91 @@ namespace RimTrust.Trade
             return loadedResearch;
         }
 
+        public static string UpdateColonyResearchFromLegacySmall(Pawn pawn)
+        {
+            int index = 0;
+            string loadedResearch = "";
+
+            List<string> initResearchRecord = new List<string>() { "PsychoidBrewing", "TreeSowing", "Brewing", "ComplexFurniture", "PassiveCooler", "Stonecutting", "ComplexClothing",
+                    "DrugProduction", "Cocoa", "Devilstrand", "CarpetMaking", "Pemmican",
+                    "Smithing", "RecurveBow",
+                    "PsychiteRefining", "WakeUpProduction", "GoJuiceProduction", "PenoxycylineProduction",
+                    "LongBlades", "PlateArmor", "Greatbow",
+                    "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
+                    "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
+                    "LongRangeMineralScanner", "ShieldBelt",
+                    "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
+                    "MultiAnalyzer", "VitalsMonitor", "Fabrication", "AdvancedFabrication", "Cryptosleep", "ReconArmor", "PoweredArmor", "ChargedShot", "Bionics", "SniperTurret", "RocketswarmLauncher",
+                    "ShipBasics", "ShipCryptosleep", "ShipReactor", "ShipEngine", "ShipComputerCore", "ShipSensorCluster" };
+
+            List<int> initResearchRecordValue = new List<int>() { 500, 1000, 400, 300, 400, 300, 600,
+                    500, 1000, 800, 800, 500,
+                    700, 400,
+                    400, 600, 1000, 500,
+                    400, 600, 600,
+                    1600, 400, 700, 700, 400, 600, 500, 600, 700, 1000, 500,
+                    600, 500, 3200, 600, 300,
+                    1000, 300, 600, 500, 1200, 2000, 500, 1000, 500, 800,
+                    3000, 2000, 1200, 1200, 4000, 1000, 1000, 1500,
+                    2000, 1000,
+                    1400, 1600, 2600,
+                    4000, 2500, 4000, 4000, 2000, 6000, 6000, 3000, 2000, 3000, 3000,
+                    4000, 2800, 6000, 6000, 3000, 4000};
+
+            List<string> starterResearchRecord = new List<string>() { "TreeSowing", "ComplexFurniture", "PassiveCooler", "Stonecutting", "ComplexClothing",
+                    "DrugProduction", "Pemmican",
+                    "Smithing", "RecurveBow",
+                    "LongBlades", "PlateArmor", "Greatbow",
+                    "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Hydroponics", "PackagedSurvivalMeal",
+                    "GeothermalPower", "SterileMaterials",
+                    "Machining", "Prosthetics", "Gunsmithing", "FlakArmor", "BlowbackOperation", "GasOperation",
+                    "MicroelectronicsBasics", "HospitalBed", "MedicineProduction"
+                    };
+
+            List<int> starterResearchRecordValue = new List<int>() { 1000, 300, 400, 300, 600,
+                    500, 500,
+                    700, 400,
+                    400, 600, 600,
+                    1600, 400, 700, 700, 400, 600, 500, 700, 500,
+                    3200, 600,
+                    1000, 600, 500, 1200, 500, 1000,
+                    3000, 1200, 1500 
+                    };
+
+            foreach (string item in initResearchRecord)
+            {
+                if (LegacyResearch[index] != 0)
+                {
+                    if (Find.ResearchManager.GetProgress(ResearchProjectDef.Named((item))) < LegacyResearch[index])
+                    {
+                        int ResearchValueGained = (int)(LegacyResearch[index] - (Find.ResearchManager.GetProgress(ResearchProjectDef.Named(item))));
+                        //Log.Message("LegacyResearch for + " + item + " at index " + index + " equals: " + LegacyResearch[index]);
+                        //Log.Message("ResearchValueGained: " + ResearchValueGained);
+                        
+
+                        if (LegacyResearch[index] == initResearchRecordValue[index])
+                        {
+                            if(starterResearchRecord.Contains(item))
+                                { 
+                                Find.ResearchManager.FinishProject(ResearchProjectDef.Named(item), false, null, true);
+                                //Log.Message("LegacyResearch[index] == initResearchRecordValue[index]");
+                                //Log.Message(item + " gained " + ResearchValueGained + " research points");
+                                loadedResearch += item + "(" + ResearchValueGained + ")" + ", ";
+                                }
+                        }
+                    }
+                }
+
+                index++;
+            }
+            return loadedResearch;
+        }
+
         public static int CountColonyResearchFromLegacy(string loadedResearchString, char toFind)
         {
-            //Log.Message("loaded ResearchString: " + loadedResearchString);
+            Log.Message("loaded ResearchString: " + loadedResearchString);
             return loadedResearchString.Count(t => t == toFind);
         }
         public static void SaveTrustFunds()
@@ -884,6 +966,21 @@ namespace RimTrust.Trade
 
             return text;
         }
+
+        public static string LegacyCacheMenuSmall()
+        {
+            string text = "";
+
+            text = "Welcome decendant to the intragalactic vault trust services™ !";
+            text += "\n";
+            text += "\n";
+            text += "You have accumulated riches, knowledge and have proven to be a skilled companion.";
+            text += "\n";
+            text += "With your limited technology you can access basic research to help you on your journey ahead.";
+            text += "\n";
+
+            return text;
+        }
         public static string LegacyCacheMenuEmtpy()
         {
             string text = "";
@@ -1034,6 +1131,8 @@ namespace RimTrust.Trade
                     Scribe.loader.InitLoading(file);
                     Scribe_Values.Look<float>(ref temploadedresearch, item, 0);
                     Scribe.loader.FinalizeLoading();
+                    //Log.Message("load LegacyResearch at index " + index);
+                    //Log.Message("load LegacyResearch " + item + "from index " + index + " with loaded xp " + temploadedresearch);
 
                     Methods.LegacyResearch.Add(temploadedresearch);
                     index++;

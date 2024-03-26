@@ -6,7 +6,7 @@ namespace RimTrust.Core
     [DefOf]
     public static class CoreDefOf
     {
-        public static JobDef UseBankTerminal;
+        public static JobDef UseTrustLedgerConsole;
         public static ThingDef TrustLedgerConsole;
         public static JobDef UseNeuralChair;
         public static ThingDef NeuralInterfaceChair;

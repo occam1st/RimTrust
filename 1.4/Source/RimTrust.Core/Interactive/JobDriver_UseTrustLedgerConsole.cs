@@ -4,7 +4,7 @@ using Verse.AI;
 
 namespace RimTrust.Core.Interactive
 {
-    public class JobDriver_UseTerminal : JobDriver
+    public class JobDriver_UseTrustLedgerConsole : JobDriver
     {
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
@@ -13,15 +13,15 @@ namespace RimTrust.Core.Interactive
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.InteractionCell).FailOn((Toil to) => !((Building_Terminal)to.actor.jobs.curJob.GetTarget(TargetIndex.A).Thing).CanUseTerminalNow);
+            yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.InteractionCell).FailOn((Toil to) => !((Building_TrustLedgerConsole)to.actor.jobs.curJob.GetTarget(TargetIndex.A).Thing).CanUseTrustLedgerConsoleNow);
             yield return new Toil
             {
                 initAction = delegate
                 {
                     Pawn actor = base.CurToil.actor;
-                    if (((Building_Terminal)actor.jobs.curJob.GetTarget(TargetIndex.A).Thing).CanUseTerminalNow)
+                    if (((Building_TrustLedgerConsole)actor.jobs.curJob.GetTarget(TargetIndex.A).Thing).CanUseTrustLedgerConsoleNow)
                     {
-                        FloatMenuManager.currentAction(actor);
+                        FloatMenuManagerTLC.currentAction(actor);
                     }
                 }
             };
