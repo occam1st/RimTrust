@@ -15,24 +15,39 @@ namespace RimTrust.Core.Patches
         public static void UpdateTLCBasePowerConsumptionFromLegacyPower()
         {
             //Log.Message("updateXML with System.Xml start");
-            string path = "F:\\Steam\\steamapps\\common\\RimWorld\\Mods\\RimTrust\\Defs\\ThingDefs_Buildings\\Buildings_TrustLedgerConsole.xml";
-            XmlDocument doc = new XmlDocument();
-            //Log.Message("updateXML with System.Xml before load");
-            doc.Load(path);
+            string path = System.IO.Path.Combine(GenFilePaths.ModsFolderPath, "RimTrust", "Defs", "ThingDefs_Buildings", "Buildings_TrustLedgerConsole.xml");
+            string path2 = System.IO.Path.Combine(GenFilePaths.ModsFolderPath);
+            path2 = path2.Replace("Mods", "");
+            path2 = path2.Replace("RimWorld", "");
+            path2 = path2.Replace("common", "");
+            path2 = path2.Remove(path2.Length - 1);
+            path2 = path2.Remove(path2.Length - 1);
+            path2 = System.IO.Path.Combine(path2, "workshop", "content", "294100", "2590341520", "Defs", "ThingDefs_Buildings", "Buildings_TrustLedgerConsole.xml");
+            //Log.Message(path2);
 
-            XmlNode ThingDef;
-            XmlNode root = doc.DocumentElement;
+            if (System.IO.File.Exists(path))
+            { 
+                XmlDocument doc = new XmlDocument();
+                doc.Load(path);
+                XmlNode ThingDef;
+                XmlNode root = doc.DocumentElement;
+                ThingDef = root.SelectSingleNode("/Defs/ThingDef/comps/li/basePowerConsumption[1]");
+                string newPowerConsumption = (200 - Math.Floor(RimTrust.Trade.Methods.LegacyPower * 0.000025)).ToString();
+                ThingDef.LastChild.InnerText = newPowerConsumption;
+                doc.Save(path);
+            }
+            if (System.IO.File.Exists(path2))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(path2);
+                XmlNode ThingDef;
+                XmlNode root = doc.DocumentElement;
+                ThingDef = root.SelectSingleNode("/Defs/ThingDef/comps/li/basePowerConsumption[1]");
+                string newPowerConsumption = (200 - Math.Floor(RimTrust.Trade.Methods.LegacyPower * 0.000025)).ToString();
+                ThingDef.LastChild.InnerText = newPowerConsumption;
+                doc.Save(path2);
+            }
 
-            //Log.Message("updateXML with System.Xml before root.SelectSingleNode");
-            ThingDef = root.SelectSingleNode("/Defs/ThingDef/comps/li/basePowerConsumption[1]");
-
-            //Log.Message("updateXML with System.Xml before string newPowerConsumption");
-            string newPowerConsumption = (200 - Math.Floor(RimTrust.Trade.Methods.LegacyPower * 0.000025)).ToString();
-            //Log.Message("updateXML with System.Xml before assining string newPowerConsumption to LastChild.InnerText");
-            ThingDef.LastChild.InnerText = newPowerConsumption;
-
-            //Log.Message("updateXML with System.Xml before save");
-            doc.Save(path);
         }
     }
 }

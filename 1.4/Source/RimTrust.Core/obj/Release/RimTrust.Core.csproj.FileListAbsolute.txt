@@ -38,3 +38,12 @@ F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.4\Source\RimTrust.Core\obj\Re
 F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.4\Source\RimTrust.Core\obj\Release\RimTrust.Core.csproj.CopyComplete
 F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.4\Source\RimTrust.Core\obj\Release\RimTrust.Core.dll
 F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.4\Source\RimTrust.Core\obj\Release\RimTrust.Core.pdb
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Assemblies\RimTrust.Core.dll
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Assemblies\RimTrust.Core.pdb
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Source\RimTrust.Core\obj\Release\RimTrust.Core.csproj.AssemblyReference.cache
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Source\RimTrust.Core\obj\Release\RimTrust.Core.csproj.CoreCompileInputs.cache
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Source\RimTrust.Core\obj\Release\RimTrust.Core.csproj.CopyComplete
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Source\RimTrust.Core\obj\Release\RimTrust.Core.dll
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Source\RimTrust.Core\obj\Release\RimTrust.Core.pdb
+F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.5\Assemblies\RimTrust.Core.dll
+F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.5\Assemblies\RimTrust.Core.pdb

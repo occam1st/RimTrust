@@ -17,3 +17,12 @@ F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.4\Source\RimTrust.Core\bin\De
 F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.4\Source\RimTrust.Core\bin\Debug\RimTrust.Trade.dll
 F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.4\Source\RimTrust.Core\bin\Debug\RimTrust.Trade.pdb
 F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.4\Source\RimTrust.Core\obj\Debug\RimTrust.Core.csproj.CopyComplete
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.5\Assemblies\RimTrust.Core.dll
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.5\Assemblies\RimTrust.Core.pdb
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Source\RimTrust.Core\obj\Debug\RimTrust.Core.csproj.AssemblyReference.cache
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Source\RimTrust.Core\obj\Debug\RimTrust.Core.csproj.CoreCompileInputs.cache
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Source\RimTrust.Core\obj\Debug\RimTrust.Core.csproj.CopyComplete
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Source\RimTrust.Core\obj\Debug\RimTrust.Core.dll
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Source\RimTrust.Core\obj\Debug\RimTrust.Core.pdb
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Assemblies\RimTrust.Core.dll
+G:\modding\Rimworld\RimTrust\RimTrust Dev\1.4\Assemblies\RimTrust.Core.pdb

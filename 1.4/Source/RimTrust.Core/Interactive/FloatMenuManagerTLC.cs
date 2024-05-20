@@ -25,7 +25,7 @@ namespace RimTrust.Core.Interactive
             usesDefaultJobDriver = new Dictionary<string, bool>();
             currentAction = null;
             shiftKeyItems = new Dictionary<string, Action>();
-            Log.Message("New FloatMenuManagerTLC rewrite");
+            //Log.Message("New FloatMenuManagerTLC rewrite");
             //Access TrustFunds 
             Add("FloatMenuCaptionExchange".Translate(), delegate (Pawn p)
             {
