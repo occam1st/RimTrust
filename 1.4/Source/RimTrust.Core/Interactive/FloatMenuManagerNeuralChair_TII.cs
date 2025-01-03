@@ -82,6 +82,20 @@ namespace RimTrust.Core.Interactive
                     Methods.UpdateLegacyResearch(p, 2);
                     Methods.SaveLegacyResearch(); 
                 }, usesDefaultJobDriver: true);
+            if (RimTrust.Trade.Methods.debug)
+            {
+                Add("Pawn Skill check", delegate (Pawn p)
+                {
+                    int index = 0;
+                    foreach (SkillRecord item in p.skills.skills)
+                    {
+                        Log.Message("pawn skill  " + item.ToString() + " with level " + item.levelInt + ", skill disabled: " + item.TotallyDisabled);
+                        index++;
+                    }
+
+                }, usesDefaultJobDriver: false);
+
+            }
         }
 
         public static void Add(string str, Action<Pawn> action, bool usesDefaultJobDriver = false)

@@ -54,15 +54,15 @@ namespace RimTrust.Core.Interactive
             //Legacy skill upload
             Add("FloatMenuCaptionNeuralChair".Translate(), delegate (Pawn p)
             {
-                Log.Message("Legacy Skill upload T1");
+                //Log.Message("Legacy Skill upload T1");
                 string selectedSkill = Methods.SelectSkillToSafeNIC(p);
-                Log.Message("Legacy Skill upload T1 selected skill = " + selectedSkill);
+                //Log.Message("Legacy Skill upload T1 selected skill = " + selectedSkill);
                 SkillRecord selectedSkillRecord = Methods.SelectSkillRecordToSafeNIC(p);
                 int selectedSkillXP = Methods.SkillXPTotal(selectedSkillRecord);
 
                 List<string> initSkillRecord = new List<string>() { "Shooting", "Melee", "Construction", "Mining", "Cooking", "Plants", "Animals", "Crafting", "Artistic", "Medical", "Social", "Intellectual" };
                 int index = initSkillRecord.FindIndex(x => x == selectedSkill);
-                Log.Message("Legacy Skill upload T1 before call UpdateLegacySkills");
+                //Log.Message("Legacy Skill upload T1 before call UpdateLegacySkills");
                 Methods.UpdateLegacySkills(selectedSkill, p, 1);
                 Methods.SaveLegacySkills();
                 Methods.NicOverdoseToPawn(p);

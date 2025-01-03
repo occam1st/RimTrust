@@ -52,7 +52,14 @@ namespace RimTrust.Core.Interactive
                 }
                 else if (researchGained == 0)
                 {
-                    msg = Methods.LegacyCacheMenuEmtpy();
+                    if (Methods.LegacyResearch.Count > 0)
+                    {
+                        msg = Methods.LegacyCacheMenuNothingGained();
+                    }
+                    else if (Methods.LegacyResearch.Count == 0)
+                    { 
+                        msg = Methods.LegacyCacheMenuEmtpy();
+                    }
                 }
                 DiaNode diaNode = new DiaNode(msg);
                 DiaOption diaOption = new DiaOption("Disconnect".Translate());
@@ -70,9 +77,10 @@ namespace RimTrust.Core.Interactive
             //Upload Legacy Power from ZPM
             Add("FloatMenuCaptionLegacyPower".Translate(), delegate (Pawn p)
             {
+                //Log.Message("ZPM Upload through TLC - start of method");
                 int power = 0;
                 power = (int)Methods.TransferZPMPower();
-                Log.Message("Power level in FloatMenu return of TransferZPMPower: " + power);
+                //Log.Message("Power level in FloatMenu return of TransferZPMPower: " + power);
                 if (power >= 100)
                 {
                     string item = "You transfered ";
@@ -97,7 +105,7 @@ namespace RimTrust.Core.Interactive
                     Thing thing = ThingMaker.MakeThing(ThingDefOf.Silver);
                     thing.stackCount = ValuablesGain;
                     string msg = ValuablesGain.ToString();
-                    Log.Message("this is a TrusteeCollector test that fired with " + msg);
+                    //Log.Message("this is a TrusteeCollector test that fired with " + msg);
                     DiaNode diaNode = new DiaNode(msg);
                     DiaOption diaOption = new DiaOption("Disconnect".Translate());
                     diaOption.resolveTree = true;

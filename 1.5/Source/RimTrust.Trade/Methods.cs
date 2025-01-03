@@ -199,7 +199,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
@@ -256,7 +256,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
@@ -328,7 +328,7 @@ namespace RimTrust.Trade
 
         public static int CountColonyResearchFromLegacy(string loadedResearchString, char toFind)
         {
-            Log.Message("loaded ResearchString: " + loadedResearchString);
+            //Log.Message("loaded ResearchString: " + loadedResearchString);
             return loadedResearchString.Count(t => t == toFind);
         }
         public static void SaveTrustFunds()
@@ -438,7 +438,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
@@ -500,7 +500,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
@@ -520,6 +520,7 @@ namespace RimTrust.Trade
             }
             int totalResearchXP = 123700;
             msg += "\n\n" + "FloatMenuCaptionTotalLegacyResearchArchive".Translate() + " " + Methods.LegacyResearch.Sum() + " (" + Math.Round(((double)Methods.LegacyResearch.Sum() / (double)totalResearchXP) * 100, 4) + "%)";
+            msg += "\n\n" + "You can access the knowledge with a Neural Implant, one-hundredth of it at a time.";
             DiaNode diaNode = new DiaNode(msg);
             DiaOption diaOption = new DiaOption("Disconnect".Translate());
             diaOption.resolveTree = true;
@@ -641,9 +642,10 @@ namespace RimTrust.Trade
             //Log.Message("Start call UpdateLegacyResearch");
 
             float researchValue = 0;
-            int index = 0;
+            int index, index2;
+            index = index2 = 0;
             double researchmult = 0.25;
-            float researchPercentageSaved = 0;
+            float researchPercentageSavedBefore, researchPercentageSavedAfter = 0;
             float pawnResearchFactor = 0;
             int researchSkillindex = 11;
 
@@ -661,7 +663,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
@@ -681,6 +683,25 @@ namespace RimTrust.Trade
                     1400, 1600, 2600,
                     4000, 2500, 4000, 4000, 2000, 6000, 6000, 3000, 2000, 3000, 3000,
                     4000, 2800, 6000, 6000, 3000, 4000};
+
+                foreach (SkillRecord skill in p.skills.skills)
+                {
+                    //Log.Message("Start of foreach check for disabled Intellectual");
+                    if (skill.ToString() == "Intellectual")
+                    {
+                        if (skill.TotallyDisabled)
+                        {
+                            researchSkillindex = index2;
+                            //Log.Message("Pawn incapable of Research: " + p.Name);
+                            //Log.Message("Research Skill for " + p.Name.ToString() + " : " + p.skills.skills[researchSkillindex].ToString());
+                            //Log.Message("Pawn incapable skill : " + p.skills.skills[researchSkillindex].ToString());
+
+                            MoteMaker.ThrowText(p.DrawPos, p.Map, p.Name + " incapable of using Legacy research upload", Color.red, 7f);
+                            break;
+                        }
+                    }
+                    index2++;
+                }
 
                 if (!p.skills.skills[researchSkillindex].TotallyDisabled)
                 {
@@ -702,7 +723,7 @@ namespace RimTrust.Trade
                                 //Log.Message("researchValue equals " + researchValue);
                                 if (LegacyResearch[index] < initResearchRecordValue[index] && researchValue == initResearchRecordValue[index])
                                 {
-                                    researchPercentageSaved = (LegacyResearch[index] / initResearchRecordValue[index]) * 100;
+                                    researchPercentageSavedBefore = (LegacyResearch[index] / initResearchRecordValue[index]) * 100;
                                     pawnResearchFactor = p.GetStatValueForPawn(StatDefOf.ResearchSpeed, p);
                                     //Log.Message("Pawn " + p.Name.ToString() + " has ResearchspeedFactor of " + pawnResearchFactor);
                                     //Log.Message("initResearchRecordValue[index] - LegacyResearch[index]: " + initResearchRecordValue[index] + " - " + LegacyResearch[index]);
@@ -717,23 +738,42 @@ namespace RimTrust.Trade
                                     //Log.Message("foreach UpdateLegacyResearch researchToSafe equals " + researchToSafe);
                                     float researchToSafeWithSkill = (float)Math.Round((researchToSafe * pawnResearchFactor) / 1.5f, 0);
                                     //Log.Message("foreach UpdateLegacyResearch researchToSafeWithSkill equals " + researchToSafeWithSkill);
-                                    //Log.Message(researchPercentageSaved + "% of current research is archived before upload");
-                                    LegacyResearch[index] += researchToSafeWithSkill;
+                                    //Log.Message(researchPercentageSavedBefore + "% of current research is archived before upload");
+
                                     //Log.Message("foreach UpdateLegacyResearch with " + item + " and " + researchValue + " researchValue and " + researchToSafeWithSkill + " researchtoSafeWithSkill");
                                     //Log.Message("hitting break with " + item);
-                                    //researchPercentageSaved = (LegacyResearch[index] / initResearchRecordValue[index]) * 100;
-                                    if (researchPercentageSaved >= 99.5)
+                                    researchPercentageSavedAfter = ((LegacyResearch[index] + researchToSafeWithSkill) / initResearchRecordValue[index]) * 100;
+
+
+                                    if (researchToSafeWithSkill > initResearchRecordValue[index])
+                                    {
+                                        //Log.Message("reseachToSafeWithSkill > initResearchRecordValue[index]");
+                                        //Log.Message("researchToSafeWithSkill " + researchToSafeWithSkill);
+                                        //Log.Message("initResearchRecordValue[index] " + initResearchRecordValue[index]);
+                                        //Log.Message("researchToSafeWithSkill = initResearchRecordValue[index]");
+                                        researchToSafeWithSkill = initResearchRecordValue[index];
+                                        //Log.Message("researchToSafeWithSkill: " + researchToSafeWithSkill);
+                                        researchPercentageSavedAfter = 100;
+                                        //Log.Message("capped research gain at max research for " + item + " with " + initResearchRecordValue[index] + " XP");
+                                    }
+
+                                    if (researchPercentageSavedAfter >= 99.5)
+                                    {
+                                        researchPercentageSavedAfter = 100;
+                                        //Log.Message("researchPercentageSavedAfter is >= 99.5% and set to 100");
+                                    }
+                                    if (researchPercentageSavedAfter == 100)
                                     {
                                         LegacyResearch[index] = initResearchRecordValue[index];
-                                        researchPercentageSaved = 100;
-                                    }
-                                    if (researchPercentageSaved == 100)
-                                    {
+                                        //Log.Message("LegacyResearch " + LegacyResearch[index].ToString() + " set to " + initResearchRecordValue[index]);
                                         MoteMaker.ThrowText(p.DrawPos, p.Map, item + " research archive completed", Color.green, 5f);
                                     }
                                     else
                                     {
-                                        MoteMaker.ThrowText(p.DrawPos, p.Map, item + " +" + (int)researchToSafeWithSkill + " research points added, " + (int)researchPercentageSaved + "% in total archived", Color.green, 5f);
+                                        LegacyResearch[index] += (int)researchToSafeWithSkill;
+                                        researchPercentageSavedAfter = (LegacyResearch[index] / initResearchRecordValue[index]) * 100;
+                                        //Log.Message("LegacyResearch " + LegacyResearch[index].ToString() + " increased by " + researchToSafeWithSkill);
+                                        MoteMaker.ThrowText(p.DrawPos, p.Map, item + " +" + (int)researchToSafeWithSkill + " research points added, now " + (int)researchPercentageSavedAfter + "% in total archived", Color.green, 5f);
                                     }
                                     break;
                                 }
@@ -797,7 +837,7 @@ namespace RimTrust.Trade
 
             string orstr2 = System.IO.Path.Combine(str1, TrustName);
             string str2 = orstr2 + ".rwlr";
-
+            
             SafeSaver.Save(str2, "RWLR", (Action)(() =>
             {
                 //Log.Message("InitiateLegacyResearchSave");
@@ -810,7 +850,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
@@ -985,28 +1025,41 @@ namespace RimTrust.Trade
         {
             string text = "";
 
-            text = "Welcome traveller! This is the landing page of the 'banks across galaxies' (working title)";
+            text = "Welcome traveller!";
             text += "\n";
             text += "\n";
-            text += "Currently we have no information stored that expands your (limited) knowledge.";
+            text += "You have tried to access the (vast) library of your ancestor's knowledge.";
+            text += "\n";
+            text += "An unspecified error occured during access.";
             text += "\n";
             text += "\n";
-            text += "Please return at a later stage, once you have achieved something, that you can tell your grandchildren about.";
+            text += "The library does not seem to contain any recorded data.";
+            text += "\n";
+            text += "It seems you possess a greater understanding of the universe than your ancestors.";
+            text += "\n";
+            text += "This might be a good time to preserve that knowledge for future generations to come.";
+            text += "\n";
+
+            return text;
+        }
+
+        public static string LegacyCacheMenuNothingGained()
+        {
+            string text = "";
+
+            text = "Welcome traveller!";
             text += "\n";
             text += "\n";
-            text += "signed: founder of B.A.G.s";
+            text += "You have tried to access the (vast) library of your ancestor's knowledge.";
             text += "\n";
-            text += "   ___";
+            text += "An unspecified error occured during access.";
             text += "\n";
-            text += " | BAG |";
             text += "\n";
-            text += "  -----";
+            text += "The library does not contain any knowledge useful to you.";
             text += "\n";
-            text += "//     \\";
+            text += "It seems you possess a greater understanding of the universe than your ancestors.";
             text += "\n";
-            text += "||     ||";
-            text += "\n";
-            text += "||     ||";
+            text += "Safe travels.";
             text += "\n";
 
             return text;
@@ -1022,13 +1075,11 @@ namespace RimTrust.Trade
             {
                 foreach (Thing ZPM in Find.CurrentMap.listerThings.AllThings)
                 {
-                    
                     if (ZPM.def.defName.StartsWith("ZeroPointModule"))
                     {
-                        
                         CompPowerBattery comp = ZPM.TryGetComp<CompPowerBattery>();
                         //Log.Message("Found ZPM no. " + ZPMi + " with power level " + comp.StoredEnergy +" at position " + ZPM.Position);
-                        if (comp.StoredEnergy >= 10000f)
+                        if (comp.StoredEnergy >= 10000f && ZPM.GetRoom().OpenRoofCount < 1)
                         {
                             powerStored += comp.StoredEnergy;
                             comp.DrawPower(comp.StoredEnergy);
@@ -1114,7 +1165,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",

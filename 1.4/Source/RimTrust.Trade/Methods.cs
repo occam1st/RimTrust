@@ -199,7 +199,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
@@ -256,7 +256,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
@@ -438,7 +438,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
@@ -500,7 +500,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
@@ -641,11 +641,12 @@ namespace RimTrust.Trade
             //Log.Message("Start call UpdateLegacyResearch");
 
             float researchValue = 0;
-            int index = 0;
+            int index, index2;
+            index = index2 = 0;
             double researchmult = 0.25;
-            float researchPercentageSaved = 0;
+            float researchPercentageSavedBefore, researchPercentageSavedAfter = 0;
             float pawnResearchFactor = 0;
-            int researchSkillindex = 11;
+            int researchSkillindex = 0;
 
             if (tier != 1 && tier != 2)
             {
@@ -661,7 +662,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
@@ -673,7 +674,7 @@ namespace RimTrust.Trade
                     700, 400,
                     400, 600, 1000, 500,
                     400, 600, 600,
-                    1600, 400, 700, 700, 400, 600, 500, 600, 700, 1000, 500, 
+                    1600, 400, 700, 700, 400, 600, 500, 600, 700, 1000, 500,
                     600, 500, 3200, 600, 300,
                     1000, 300, 600, 500, 1200, 2000, 500, 1000, 500, 800,
                     3000, 2000, 1200, 1200, 4000, 1000, 1000, 1500,
@@ -682,67 +683,104 @@ namespace RimTrust.Trade
                     4000, 2500, 4000, 4000, 2000, 6000, 6000, 3000, 2000, 3000, 3000,
                     4000, 2800, 6000, 6000, 3000, 4000};
 
-                if (!p.skills.skills[researchSkillindex].TotallyDisabled)
+                foreach (SkillRecord skill in p.skills.skills)
                 {
-                    //Log.Message("Research Skill for " + p.Name.ToString() + " : " + p.skills.skills[researchSkillindex].ToString());
-                    //Log.Message("start of foreach loop in UpdateLegacyResearch");
-
-                    foreach (string item in initResearchRecord)
+                    //Log.Message("Start of foreach check for disabled Intellectual");
+                    if (skill.ToString() == "Intellectual")
                     {
-                        researchValue = Find.ResearchManager.GetProgress(ResearchProjectDef.Named(item));
-                        if (!initResearchRecord.Contains(item))
+                        if (skill.TotallyDisabled)
                         {
+                            researchSkillindex = index2;
+                            //Log.Message("Pawn incapable of Research: " + p.Name);
+                            //Log.Message("Research Skill for " + p.Name.ToString() + " : " + p.skills.skills[researchSkillindex].ToString());
+                            //Log.Message("Pawn incapable skill : " + p.skills.skills[researchSkillindex].ToString());
+
+                            MoteMaker.ThrowText(p.DrawPos, p.Map, p.Name + " incapable of using Legacy research upload", Color.red, 7f);
                             break;
                         }
-                        else
+                    }
+                    index2++;
+                }
+
+                if (!p.skills.skills[researchSkillindex].TotallyDisabled)
+                    
+                        //Log.Message("Research Skill for " + p.Name.ToString() + " : " + p.skills.skills[researchSkillindex].ToString());
+                        //Log.Message("start of foreach loop in UpdateLegacyResearch");
+
+                        foreach (string item in initResearchRecord)
                         {
-                            if (researchValue != 0)
+                            researchValue = Find.ResearchManager.GetProgress(ResearchProjectDef.Named(item));
+                            if (!initResearchRecord.Contains(item))
                             {
-                                //Log.Message("LegacyResearch for " + item + " at index " + index + " equals " + LegacyResearch[index]);
-                                //Log.Message("researchValue equals " + researchValue);
-                                if (LegacyResearch[index] < initResearchRecordValue[index] && researchValue == initResearchRecordValue[index])
+                                break;
+                            }
+                            else
+                            {
+                                if (researchValue != 0)
                                 {
-                                    researchPercentageSaved = (LegacyResearch[index] / initResearchRecordValue[index]) * 100;
-                                    pawnResearchFactor = p.GetStatValueForPawn(StatDefOf.ResearchSpeed, p);
-                                    //Log.Message("Pawn " + p.Name.ToString() + " has ResearchspeedFactor of " + pawnResearchFactor);
-                                    //Log.Message("initResearchRecordValue[index] - LegacyResearch[index]: " + initResearchRecordValue[index] + " - " + LegacyResearch[index]);
-                                    //Log.Message("researchmult + researchmult * tier: " + researchmult + " + " + researchmult + " * " + tier);
-                                    //Log.Message("(initResearchRecordValue[index] / 500) equals " + initResearchRecordValue[index] + " / 500");
-                                    //Log.Message("(initResearchRecordValue[index] / 500) equals " + initResearchRecordValue[index] / 500);
-                                    if (LegacyResearch[index] == 0)
+                                    //Log.Message("LegacyResearch for " + item + " at index " + index + " equals " + LegacyResearch[index]);
+                                    //Log.Message("researchValue equals " + researchValue);
+                                    if (LegacyResearch[index] < initResearchRecordValue[index] && researchValue == initResearchRecordValue[index])
                                     {
-                                        LegacyResearch[index] = 1;
+                                        researchPercentageSavedBefore = (LegacyResearch[index] / initResearchRecordValue[index]) * 100;
+                                        pawnResearchFactor = p.GetStatValueForPawn(StatDefOf.ResearchSpeed, p);
+                                        //Log.Message("Pawn " + p.Name.ToString() + " has ResearchspeedFactor of " + pawnResearchFactor);
+                                        //Log.Message("initResearchRecordValue[index] - LegacyResearch[index]: " + initResearchRecordValue[index] + " - " + LegacyResearch[index]);
+                                        //Log.Message("researchmult + researchmult * tier: " + researchmult + " + " + researchmult + " * " + tier);
+                                        //Log.Message("(initResearchRecordValue[index] / 500) equals " + initResearchRecordValue[index] + " / 500");
+                                        //  Log.Message("(initResearchRecordValue[index] / 500) equals " + initResearchRecordValue[index] / 500);
+                                        if (LegacyResearch[index] == 0)
+                                        {
+                                            LegacyResearch[index] = 1;
+                                        }
+                                        float researchToSafe = (float)Math.Round((((initResearchRecordValue[index] - LegacyResearch[index]) * (researchmult + researchmult * tier)) / (initResearchRecordValue[index] / 500f)), 0);
+                                        //Log.Message("foreach UpdateLegacyResearch researchToSafe equals " + researchToSafe);
+                                        float researchToSafeWithSkill = (float)Math.Round((researchToSafe * pawnResearchFactor) / 1.5f, 0);
+                                        //Log.Message("foreach UpdateLegacyResearch researchToSafeWithSkill equals " + researchToSafeWithSkill);
+                                        //Log.Message(researchPercentageSavedBefore + "% of current research is archived before upload");
+
+                                        //Log.Message("foreach UpdateLegacyResearch with " + item + " and " + researchValue + " researchValue and " + researchToSafeWithSkill + " researchtoSafeWithSkill");
+                                        //Log.Message("hitting break with " + item);
+                                        researchPercentageSavedAfter = (LegacyResearch[index] / initResearchRecordValue[index]) * 100;
+
+
+                                        if (researchToSafeWithSkill > (initResearchRecordValue[index] - LegacyResearch[index]))
+                                        {
+                                            //Log.Message("reseachToSafeWithSkill > (initResearchRecordValue[index] - LegacyResearch[index]");
+                                            //Log.Message("researchToSafeWithSkill " + researchToSafeWithSkill);
+                                            //Log.Message("(initResearchRecordValue[index] - LegacyResearch[index] " + initResearchRecordValue[index] + " - " + LegacyResearch[index]);
+                                            //Log.Message("researchToSafeWithSkill = initResearchRecordValue[index]");
+                                            researchToSafeWithSkill = initResearchRecordValue[index];
+                                            //Log.Message("researchToSafeWithSkill: " + researchToSafeWithSkill);
+                                            researchPercentageSavedAfter = 100;
+                                            //Log.Message("capped research gain at max research for " + item + " with " + initResearchRecordValue[index] + " XP");
+                                        }
+
+                                        if (researchPercentageSavedAfter >= 99.5)
+                                        {
+                                            researchPercentageSavedAfter = 100;
+                                            //Log.Message("researchPercentageSavedAfter set to 100");
+                                        }
+                                        if (researchPercentageSavedAfter == 100)
+                                        {
+                                            LegacyResearch[index] = initResearchRecordValue[index];
+                                            //Log.Message("LegacyResearch " + LegacyResearch[index].ToString() + " set to " + initResearchRecordValue[index]);
+                                            MoteMaker.ThrowText(p.DrawPos, p.Map, item + " research archive completed", Color.green, 5f);
+                                        }
+                                        else
+                                        {
+                                            LegacyResearch[index] += (int)researchToSafeWithSkill;
+                                            researchPercentageSavedAfter = (LegacyResearch[index] / initResearchRecordValue[index]) * 100;
+                                            //Log.Message("LegacyResearch " + LegacyResearch[index].ToString() + " increased by " + researchToSafeWithSkill);
+                                            MoteMaker.ThrowText(p.DrawPos, p.Map, item + " +" + (int)researchToSafeWithSkill + " research points added, now " + (int)researchPercentageSavedAfter + "% in total archived", Color.green, 5f);
+                                        }
+                                        break;
                                     }
-                                    float researchToSafe = (float)Math.Round((((initResearchRecordValue[index] - LegacyResearch[index]) * (researchmult + researchmult * tier)) / (initResearchRecordValue[index] / 500f)), 0);
-                                    //Log.Message("foreach UpdateLegacyResearch researchToSafe equals " + researchToSafe);
-                                    float researchToSafeWithSkill = (float)Math.Round((researchToSafe * pawnResearchFactor) / 1.5f, 0);
-                                    //Log.Message("foreach UpdateLegacyResearch researchToSafeWithSkill equals " + researchToSafeWithSkill);
-                                    //Log.Message(researchPercentageSaved + "% of current research is archived before upload");
-                                    LegacyResearch[index] += researchToSafeWithSkill;
-                                    //Log.Message("foreach UpdateLegacyResearch with " + item + " and " + researchValue + " researchValue and " + researchToSafeWithSkill + " researchtoSafeWithSkill");
-                                    //Log.Message("hitting break with " + item);
-                                    //researchPercentageSaved = (LegacyResearch[index] / initResearchRecordValue[index]) * 100;
-                                    if (researchPercentageSaved >= 99.5)
-                                    {
-                                        LegacyResearch[index] = initResearchRecordValue[index];
-                                        researchPercentageSaved = 100;
-                                    }
-                                    if (researchPercentageSaved == 100)
-                                    {
-                                        MoteMaker.ThrowText(p.DrawPos, p.Map, item + " research archive completed", Color.green, 5f);
-                                    }
-                                    else
-                                    {
-                                        MoteMaker.ThrowText(p.DrawPos, p.Map, item + " +" + (int)researchToSafeWithSkill + " research points added, " + (int)researchPercentageSaved + "% in total archived", Color.green, 5f);
-                                    }
-                                    break;
                                 }
                             }
+                            index++;
                         }
-                        index++;
-                    }
-                }
-            }
+             }
         }
 
         public static void InitiateLegacySkillSave()
@@ -810,7 +848,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
@@ -828,6 +866,7 @@ namespace RimTrust.Trade
         {
             SaveLegacyPower();
         }
+                
         public static void NicOverdoseToPawn(Pawn p)
         {
             BodyPartRecord part = p.RaceProps.body.corePart;
@@ -1114,7 +1153,7 @@ namespace RimTrust.Trade
                     "LongBlades", "PlateArmor", "Greatbow",
                     "Electricity", "Batteries", "BiofuelRefining", "WatermillGenerator", "NutrientPaste", "SolarPanels", "AirConditioning", "Autodoors", "Hydroponics", "TubeTelevision", "PackagedSurvivalMeal",
                     "Firefoam", "IEDs", "GeothermalPower", "SterileMaterials", "ColoredLights",
-                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurett",
+                    "Machining", "SmokepopBelt", "Prosthetics", "Gunsmithing", "FlakArmor", "Mortars", "BlowbackOperation", "GasOperation","GunTurrets", "FoamTurret",
                     "MicroelectronicsBasics", "FlatscreenTelevision", "MoisturePump", "HospitalBed", "DeepDrilling", "GroundPenetratingScanner", "TransportPod", "MedicineProduction",
                     "LongRangeMineralScanner", "ShieldBelt",
                     "PrecisionRifling", "HeavyTurrets", "MultibarrelWeapons",
