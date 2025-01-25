@@ -48,6 +48,7 @@ namespace RimTrust.Core.Interactive
                     //Log.Message("LegacyArchive foreach loop with index " + index + " after index++");
                 }
                 msg += "\n\n" + "FloatMenuCaptionTotalLegacySkillArchive".Translate() + " " + Methods.LegacySkills.Sum() + " (" + Math.Round(((double)Methods.LegacySkills.Sum() / (double)3564000) * 100, 4) + "%)";
+                msg += "\n\n" + "You can access the knowledge with a Neural Implant, one-hundredth of it at a time.";
                 DiaNode diaNode = new DiaNode(msg);
                 DiaOption diaOption = new DiaOption("Disconnect".Translate());
                 diaOption.resolveTree = true;
@@ -91,6 +92,7 @@ namespace RimTrust.Core.Interactive
                     int index = 0;
                     foreach (SkillRecord item in p.skills.skills)
                     {
+                        //leave log message on, it is linked to debug flag in Methods class
                         //Log.Message("pawn skill  " + item.ToString() + " with level " + item.levelInt + ", skill disabled: " + item.TotallyDisabled);
                         index++;
                     }

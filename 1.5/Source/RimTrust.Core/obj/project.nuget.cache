@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "VXB3jSNTvLmN0rjXxnyc5mwTrGrjTKp1QQ3wSMFmtVw7u9t11LdZTG1iBD6ZErS9EUkNokFGQSlqwaGemqJAGQ==",
+  "success": true,
+  "projectFilePath": "G:\\modding\\Rimworld\\RimTrust\\RimTrust Dev - NuGet\\1.5\\Source\\RimTrust.Core\\RimTrust.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Occam\\.nuget\\packages\\krafs.rimworld.ref\\1.5.4297\\krafs.rimworld.ref.1.5.4297.nupkg.sha512",
+    "C:\\Users\\Occam\\.nuget\\packages\\lib.harmony\\2.3.3\\lib.harmony.2.3.3.nupkg.sha512"
+  ],
+  "logs": []
+}

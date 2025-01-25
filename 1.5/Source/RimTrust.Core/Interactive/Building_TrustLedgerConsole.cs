@@ -40,6 +40,8 @@ namespace RimTrust.Core.Interactive
             {
                 //TO-DO maybe load power comp or basePowerConsumption here
             }
+            RimTrust.Core.Patches.Patch_LMWsDeepStorageSafe.Patch_LMWsDeepStorageSafeForBanknotes();
+            RimTrust.Core.Patches.Patch_GunsGalore_RunNGunners_Banknotes.Patch_GunsGalore_RunNGunners_Accept_Banknotes();
         }
 
         public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn selPawn)

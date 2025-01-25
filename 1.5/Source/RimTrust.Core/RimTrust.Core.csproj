@@ -31,13 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.3.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>F:\Steam\steamapps\common\RimWorld\Mods\RimTrust\1.5\Assemblies\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>F:\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -71,13 +64,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Defs\Ascension.cs" />
+    <Compile Include="Defs\BankDefOf.cs" />
+    <Compile Include="Defs\CoreDefOf2.cs" />
+    <Compile Include="Defs\ThoughtDefOf.cs" />
+    <Compile Include="DetourInjectorCompact.cs" />
+    <Compile Include="Dialog_PayByBankNotes.cs" />
+    <Compile Include="Ext\ExtUtil.cs" />
+    <Compile Include="Ext\Trader_BankNoteExchange.cs" />
+    <Compile Include="Ext\VirtualTrader.cs" />
     <Compile Include="Interactive\Building_ArtificialLifepod.cs" />
     <Compile Include="Interactive\Building_NeuralChair_TII.cs" />
     <Compile Include="Interactive\Building_NeuralChair.cs" />
     <Compile Include="Interactive\Building_NutrientTube.cs" />
     <Compile Include="Interactive\Building_TLCsmall.cs" />
     <Compile Include="Interactive\Building_TrustLedgerConsole.cs" />
-    <Compile Include="CoreDefOf.cs" />
+    <Compile Include="Defs\CoreDefOf.cs" />
     <Compile Include="Interactive\Building_ZPM.cs" />
     <Compile Include="Interactive\FloatMenuManagerTLCsmall.cs" />
     <Compile Include="Interactive\FloatMenuManagerArtificialLifepod.cs" />
@@ -94,16 +96,37 @@
     <Compile Include="Interactive\JobDriver_UseNeuralChair_TII.cs" />
     <Compile Include="Interactive\JobDriver_UseNeuralChair.cs" />
     <Compile Include="Interactive\JobDriver_UseTrustLedgerConsole.cs" />
+    <Compile Include="Methods.cs" />
     <Compile Include="ModContentRemover.cs" />
+    <Compile Include="Patches\Patch_GunsGalore_RunNGunners_Banknotes.cs" />
+    <Compile Include="Patches\Patch_PawnDiedOrDownedThoughtsUtility.cs" />
+    <Compile Include="Patches\Patch_Settlement_TraderTracker.cs" />
+    <Compile Include="Patches\Patch_LMWs_Deep_Storage_Safe.cs" />
     <Compile Include="Patches\Patch_TLCBasePowerConsumptionLegacyPower.cs" />
+    <Compile Include="Patches\Patch_TradeShip.cs" />
+    <Compile Include="Patches\Patch_TradeUtility_GetPricePlayerBuy.cs" />
+    <Compile Include="Patches\Patch_TradeUtility_GetPricePlayerSell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Storyteller+Incidents\IncidentCategoryDefOf.cs" />
+    <Compile Include="Storyteller+Incidents\IncidentDefOf.cs" />
+    <Compile Include="Storyteller+Incidents\IncidentWorker_InterestDrop.cs" />
+    <Compile Include="Storyteller+Incidents\IncidentWorker_NeuralSync.cs" />
+    <Compile Include="Storyteller+Incidents\IncidentWorker_TrusteeCollector.cs" />
+    <Compile Include="Storyteller+Incidents\StorytellerCompProperties_InterestDrop.cs" />
+    <Compile Include="Storyteller+Incidents\StorytellerCompProperties_NeuralSync.cs" />
+    <Compile Include="Storyteller+Incidents\StorytellerCompProperties_TrusteeCollector.cs" />
+    <Compile Include="Storyteller+Incidents\StorytellerComp_InterestDrop.cs" />
+    <Compile Include="Storyteller+Incidents\StorytellerComp_NeuralSync.cs" />
+    <Compile Include="Storyteller+Incidents\StorytellerComp_TrusteeCollector.cs" />
+    <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RimTrust.Trade\RimTrust.Trade.csproj">
-      <Project>{47346c7e-bf6d-4745-9768-702f118d5f44}</Project>
-      <Name>RimTrust.Trade</Name>
-    </ProjectReference>
+    <PackageReference Include="Krafs.Rimworld.Ref">
+      <Version>1.5.4297</Version>
+    </PackageReference>
+    <PackageReference Include="Lib.Harmony">
+      <Version>2.3.3</Version>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
